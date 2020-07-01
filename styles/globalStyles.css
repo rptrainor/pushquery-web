@@ -1,0 +1,143 @@
+@font-face {
+  font-family: "Lato", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Open+Sans:wght@400;600&display=swap");
+}
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: #f2eee4;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2eee4;
+}
+footer p {
+  font-size: 2rem;
+  background-color: #f2eee4;
+  margin: 1rem 0 1rem 0;
+  color: #005eae;
+}
+footer a {
+  margin: 0;
+  padding: 0;
+  color: #005eae;
+  background-color: #f2eee4;
+}
+body {
+  padding: 0;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1;
+  white-space: pre-wrap;
+  min-width: 100%;
+}
+div {
+  margin: 0;
+  padding: 0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+a {
+  text-decoration: none;
+  color: #005eae;
+  background-color: #f2eee4;
+  font-size: 2rem;
+  margin: 0.25rem;
+  padding: 0.5rem;
+  font-weight: 500;
+  font-family: "Lato", sans-serif;
+  cursor: pointer;
+}
+.button_primary {
+  background-color: #009900;
+  border: 0.25rem solid #009900;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+.button_text_primary {
+  color: #ffffff;
+  background-color: #009900;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.1rem;
+  padding: 0.1rem;
+  font-family: "Lato", sans-serif;
+  cursor: pointer;
+}
+.button_secondary {
+  background-color: #ffffff;
+  border: 0;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 0.25rem solid #009900;
+  border-radius: 1rem;
+}
+.button_text_secondary {
+  color: #009900;
+  background-color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.1rem;
+  padding: 0.1rem;
+  font-family: "Lato", sans-serif;
+  cursor: pointer;
+}
+.header_primary {
+  color: #009900;
+  background-color: #f2eee4;
+  font-family: "Lato", sans-serif;
+  font-size: 2.75rem;
+  font-weight: 700;
+  margin: 0.25rem 0.1rem 0 0.1rem;
+  padding: 0.25rem 0.1rem 0 0.1rem;
+}
+
+p,
+li {
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+  background-color: #f2eee4;
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0.25rem 0.1rem 0 0.1rem;
+  padding: 0.25rem 0.1rem 0 0.1rem;
+  list-style-type: none;
+}
+
+@media (min-width: 0px) and (max-width: 567px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 568px) and (max-width: 767px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1365px) {
+}
+@media (min-width: 1366px) {
+}
