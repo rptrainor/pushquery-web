@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import { useUser } from "../context/userContext";
 import firebase from "../firebase/clientApp";
 
-export default function Home() {
+import Home from "../src/components/organisms/Home";
+
+export default function IndexPage() {
   // Our custom hook to get context values
   const { loadingUser, user } = useUser();
 
@@ -16,17 +18,5 @@ export default function Home() {
     console.log(firebase);
   }, [loadingUser, user]);
 
-  return (
-    <div className="container">
-      <Head>
-        <title>Next.js w/ Firebase Client-Side</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className="title">Next.js w/ Firebase Client-Side</h1>
-        <p className="description">Fill in your credentials to get started</p>
-      </main>
-    </div>
-  );
+  return <Home />;
 }
