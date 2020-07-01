@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from "../../../firebase/clientApp";
+import TalkCover from "./TalkCover";
 
 export default function Home() {
   const [talks, setTalks] = React.useState([]);
@@ -49,7 +50,7 @@ export default function Home() {
   if (loading) return "loading...";
   return (
     <React.Fragment>
-      {talks ? talks.map((talk) => <p>{talk.title}</p>) : null}
+      {talks ? talks.map((talk) => <TalkCover talk={talk} key={talk._id} />) : null}
     </React.Fragment>
   );
 }
