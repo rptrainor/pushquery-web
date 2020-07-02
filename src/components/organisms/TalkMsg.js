@@ -4,7 +4,6 @@ import TalkMsgStyles from "../../../styles/talkMsg.module.css";
 export default function TalkMsg({ message }) {
   const msgCreatedAt = message.createdAt;
   const howLongAgo = formatDistance(Date.now(), msgCreatedAt, []);
-  console.log(message);
 
   // function to report a comment
   const handleReport = (event) => {

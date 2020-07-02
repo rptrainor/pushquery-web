@@ -4,13 +4,14 @@
   min-height: 100vh;
 }
 .title {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  justify-self: center;
+  justify-self: center; */
   /* background-color: #fff; */
-  /* width: 100vw; */
+  width: 100%;
   padding: 2rem;
-  margin: 0;
+  margin: 0 auto;
+  text-align: center;
 }
 .msgBox {
   display: flex;
@@ -37,7 +38,6 @@
   font-family: "Open Sans", sans-serif;
   color: #333;
   font-size: 1.8rem;
-
 }
 .button {
   display: flex;

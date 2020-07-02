@@ -65,6 +65,7 @@ export default function Talk({ id }) {
   // Function that sends the message to the Talk in Firestore
   const handleMsgSend = async () => {
     const text = inputText;
+    setInputText("");
     if (!isBlocked) {
       if (inputText.length > 0) {
         if (user) {
@@ -86,7 +87,6 @@ export default function Talk({ id }) {
                 photoURL: user.photoURL,
               },
             });
-          await setInputText("");
         } else {
           alert("You Me Be Logged In To Comment");
           router.push("/profile");
@@ -105,6 +105,8 @@ export default function Talk({ id }) {
   const returnToMainHome = () => {
     router.push("/");
   };
+
+  console.log({ user, isBlocked });
 
   // Component will return loading... until the messages load from Firestore
   if (!messages) return <Text>loading...</Text>;
@@ -129,6 +131,7 @@ export default function Talk({ id }) {
                 <textarea
                   className={TalkStyles.textInput}
                   onChange={(event) => setInputText(event.target.value)}
+                  value={inputText}
                   placeholder="What are you curious about?"
                 />
                 <button className={TalkStyles.button} onClick={handleMsgSend}>
@@ -142,6 +145,7 @@ export default function Talk({ id }) {
             <textarea
               className={TalkStyles.textInput}
               onChange={(event) => setInputText(event.target.value)}
+              value={inputText}
               placeholder="What are you curious about?"
             />
             <button className={TalkStyles.button} onClick={handleMsgSend}>

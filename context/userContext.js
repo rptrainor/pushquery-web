@@ -24,7 +24,12 @@ export default function UserContextComp({ children }) {
             .doc(uid)
             .get()
             .then((doc) => {
-              if (doc.data().flag.flagged === true) {
+              if (
+                doc &&
+                doc.data() &&
+                doc.data().flag &&
+                doc.data().flag.flagged === true
+              ) {
                 setIsBlocked(true);
               }
             });
