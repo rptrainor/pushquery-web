@@ -1,9 +1,10 @@
 import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useUser } from "../../../context/userContext";
 import firebase from "../../../firebase/clientApp";
-import TalkMsg from './TalkMsg'
-import TalkStyles from '../../../styles/talk.module.css'
+import TalkMsg from "./TalkMsg";
+import TalkStyles from "../../../styles/talk.module.css";
 
 export default function Talk({ id }) {
   const [messages, setMessages] = React.useState([]);
@@ -67,7 +68,6 @@ export default function Talk({ id }) {
     if (!isBlocked) {
       if (inputText.length > 0) {
         if (user) {
-          setFocused(false);
           await firebase
             .firestore()
             .collection("talks")
@@ -109,10 +109,47 @@ export default function Talk({ id }) {
   // Component will return loading... until the messages load from Firestore
   if (!messages) return <Text>loading...</Text>;
   return (
-    <div>
+    <div className={TalkStyles.container}>
       <h1 className={TalkStyles.title}>{talk.title}</h1>
-      {messages ? messages.map((message) => <TalkMsg message={message} key={message._id} />) : null}
-
+      <div className={TalkStyles.msgList}>
+        {messages
+          ? messages.map((message) => (
+              <TalkMsg message={message} key={message._id} />
+            ))
+          : null}
+      </div>
+      <>
+        {!user ? (
+          <Link href="/login">
+            <a>
+              <div className={TalkStyles.msgBox}>
+                {/* <p className={TalkStyles.warningText}>
+                You must be logged in to join the converstion
+              </p> */}
+                <textarea
+                  className={TalkStyles.textInput}
+                  onChange={(event) => setInputText(event.target.value)}
+                  placeholder="What are you curious about?"
+                />
+                <button className={TalkStyles.button} onClick={handleMsgSend}>
+                  <p className={TalkStyles.buttonText}>SEND</p>
+                </button>
+              </div>
+            </a>
+          </Link>
+        ) : (
+          <div className={TalkStyles.msgBox}>
+            <textarea
+              className={TalkStyles.textInput}
+              onChange={(event) => setInputText(event.target.value)}
+              placeholder="What are you curious about?"
+            />
+            <button className={TalkStyles.button} onClick={handleMsgSend}>
+              <p className={TalkStyles.buttonText}>SEND</p>
+            </button>
+          </div>
+        )}
+      </>
     </div>
   );
 }

@@ -1,8 +1,71 @@
+.container {
+  position: relative;
+  height: 100%;
+  min-height: 100vh;
+}
 .title {
-    display: flex;
-    flex-direction: row;
-    justify-self: center;
-    /* width: 100vw; */
-    padding: 1rem 1rem 1rem 0.5rem;
-    margin: 1rem 1rem 1rem 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+  /* background-color: #fff; */
+  /* width: 100vw; */
+  padding: 2rem;
+  margin: 0;
+}
+.msgBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  /* margin: 0 auto; */
+  border: 0;
+  font-family: "Lato", sans-serif;
+  background-color: #f2eee4;
+  /* margin-top: 10rem; */
+}
+.textInput {
+  height: 5rem;
+  width: 95%;
+  border: 0;
+  border-radius: 1rem;
+  background-color: #fff;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+  font-size: 1.8rem;
+
+}
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  background-color: green;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  height: 5rem;
+  border: 0;
+  width: 95%;
+}
+.buttonText {
+  color: #fff;
+  font-size: 3rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+.msgList {
+  height: 100%;
+  position: relative;
+  min-height: 100vh;
+}
+.warningText {
+  font-size: 1.2rem;
+  margin-left: 2vw;
 }

@@ -48,7 +48,7 @@ export default function TalkMsg({ message }) {
           </div>
           {/* <button onClick={(event) => handleReport(event)}>REPORT</button> */}
         </div>
-        <p>{message.text}</p>
+        <p className={TalkMsgStyles.text}>{message.text}</p>
       </div>
     </div>
   );
