@@ -1,0 +1,8 @@
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    /* width: 100vw; */
+    padding: 1rem 1rem 1rem 0.5rem;
+    margin: 1rem 1rem 1rem 0.5rem;
+}
