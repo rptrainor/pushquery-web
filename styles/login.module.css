@@ -68,3 +68,32 @@
   text-align: center;
   font-weight: bold;
 }
+@media (min-width: 0px) and (max-width: 567px) {
+  .container {
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+  .label {
+    width: 100%;
+  }
+  .textInput {
+    width: 100%;
+  }
+  .buttonSecondary {
+    width: 100%;
+  }
+  .button {
+    width: 100%;
+  }
+}
+
+@media (min-width: 568px) and (max-width: 767px) {
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media (min-width: 1024px) and (max-width: 1365px) {
+}
+@media (min-width: 1366px) {
+}
