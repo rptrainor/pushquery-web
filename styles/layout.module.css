@@ -1,6 +1,6 @@
 .footerContainer {
-  margin: 0;
-  padding: 0;
+  margin: 1rem 0 0 0;
+  padding: 1rem 0 2rem 0;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -24,6 +24,24 @@
   width: 8rem;
   height: 3rem;
   margin: 0 0.5rem 0.5rem 0.5rem;
+}
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 6rem;
+  width: 100%;
+}
+.headerIconBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.headerIconBox p {
+  font-size: 1.2rem;
 }
 @media (min-width: 0px) and (max-width: 567px) {
   /* .footerContainer {

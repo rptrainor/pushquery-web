@@ -49,8 +49,8 @@ export default function Home() {
   }, []);
   if (loading) return "loading...";
   return (
-    <React.Fragment>
+    <div>
       {talks ? talks.map((talk) => <TalkCover talk={talk} key={talk._id} />) : null}
-    </React.Fragment>
+    </div>
   );
 }

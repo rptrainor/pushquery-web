@@ -22,10 +22,15 @@ main {
   max-width: 1000px;
   margin: 0 auto;
 }
+header {
+  background-color: #fff;
+  width: 100vw;
+  border-bottom: 0.1rem solid #bab6ad;
+}
 footer {
   background-color: #fff;
   width: 100vw;
-  border-top: 0.1rem solid #BAB6AD;
+  border-top: 0.1rem solid #bab6ad;
 }
 footer p {
   font-size: 1.6rem;

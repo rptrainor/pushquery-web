@@ -1,11 +1,20 @@
 import React from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import Head from "next/head";
-
+import {
+  HomeOutlined,
+  PlusCircleOutlined,
+  HeartOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import LayoutStyles from "../../../styles/layout.module.css";
 
 export default function Layout({ children }) {
+  const router = useRouter();
+
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <title>Pushquery | Where SciComm Happens</title>
@@ -44,16 +53,90 @@ export default function Layout({ children }) {
           }}
         />
       </Head>
+      <header>
+        <div className={LayoutStyles.headerContainer}>
+          <Link href="/">
+            <a>
+              {router.pathname == "/" ? (
+                <div className={LayoutStyles.headerIconBox}>
+                  <HomeOutlined
+                    style={{ fontSize: "3rem", color: "#009900" }}
+                  />
+                  <p>Home</p>
+                </div>
+              ) : (
+                <div className={LayoutStyles.headerIconBox}>
+                  <HomeOutlined style={{ fontSize: "3rem", color: "#333" }} />
+                  <p>Home</p>
+                </div>
+              )}
+            </a>
+          </Link>
+          <Link href="/create">
+            <a>
+              {router.pathname == "/create" ? (
+                <div className={LayoutStyles.headerIconBox}>
+                  <PlusCircleOutlined
+                    style={{ fontSize: "3rem", color: "#009900" }}
+                  />
+                  <p>Create</p>
+                </div>
+              ) : (
+                <div className={LayoutStyles.headerIconBox}>
+                  <PlusCircleOutlined
+                    style={{ fontSize: "3rem", color: "#333" }}
+                  />
+                  <p>Create</p>
+                </div>
+              )}
+            </a>
+          </Link>
+          <Link href="/values">
+            <a>
+              {router.pathname == "/values" ? (
+                <div className={LayoutStyles.headerIconBox}>
+                  <HeartOutlined
+                    style={{ fontSize: "3rem", color: "#009900" }}
+                  />
+                  <p>Values</p>
+                </div>
+              ) : (
+                <div className={LayoutStyles.headerIconBox}>
+                  <HeartOutlined style={{ fontSize: "3rem", color: "#333" }} />
+                  <p>Values</p>
+                </div>
+              )}
+            </a>
+          </Link>
+          <Link href="/login">
+            <a>
+              {router.pathname == "/login" || router.pathname == "/signup" ? (
+                <div className={LayoutStyles.headerIconBox}>
+                  <UserOutlined
+                    style={{ fontSize: "3rem", color: "#009900" }}
+                  />
+                  <p>Log In</p>
+                </div>
+              ) : (
+                <div className={LayoutStyles.headerIconBox}>
+                  <UserOutlined style={{ fontSize: "3rem", color: "#333" }} />
+                  <p>Log In</p>
+                </div>
+              )}
+            </a>
+          </Link>
+        </div>
+      </header>
       <main>{children}</main>
       <footer className={LayoutStyles.footerContainer}>
         <div className={LayoutStyles.colItem}>
-        <a href="https://twitter.com/pushquery">
-          <p>Follow Pushquery</p>
-          <img
-            src="/Twitter_Logo_Blue.svg"
-            alt="Twitter logo"
-            className={LayoutStyles.twitterLogo}
-          />
+          <a href="https://twitter.com/pushquery">
+            <p>Follow Pushquery</p>
+            <img
+              src="/Twitter_Logo_Blue.svg"
+              alt="Twitter logo"
+              className={LayoutStyles.twitterLogo}
+            />
           </a>
         </div>
         <div>
