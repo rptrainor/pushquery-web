@@ -1,0 +1,53 @@
+.footerContainer {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.container {
+  margin: 0 auto;
+  /* width: 100vw; */
+}
+.twitterLogo {
+  max-width: 3rem;
+  margin: 0;
+  padding: 0;
+  margin: 0 0 0 5rem;
+}
+.colItem {
+  display: flex;
+  flex-direction: row;
+}
+.appStoreDL {
+  width: 8rem;
+  height: 3rem;
+  margin: 0 0.5rem 0.5rem 0.5rem;
+}
+@media (min-width: 0px) and (max-width: 567px) {
+  /* .footerContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .footerCol {
+    min-width: 80%;
+  } */
+}
+
+@media (min-width: 568px) and (max-width: 767px) {
+  /* .footerContainer {
+    display: flex;
+    flex-direction: column;
+  } */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media (min-width: 1024px) and (max-width: 1365px) {
+}
+@media (min-width: 1366px) {
+}
