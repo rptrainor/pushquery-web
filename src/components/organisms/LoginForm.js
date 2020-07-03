@@ -35,7 +35,7 @@ export default function componentName() {
     <fieldset className={LoginStyles.fieldset}>
       <div className={LoginStyles.container}>
         <h1 className={LoginStyles.header}>Log In</h1>
-        <label className={LoginStyles.label} for="email">
+        <label className={LoginStyles.label} htmlFor="email">
           Email
         </label>
         <input
@@ -45,7 +45,7 @@ export default function componentName() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-        <label className={LoginStyles.label} for="password">
+        <label className={LoginStyles.label} htmlFor="password">
           Password
         </label>
         <input

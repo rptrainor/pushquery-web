@@ -8,13 +8,15 @@ import {
   HeartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { useUser } from "../../../context/userContext";
 import LayoutStyles from "../../../styles/layout.module.css";
 
 export default function Layout({ children }) {
   const router = useRouter();
-
+  const { loadingUser, user, isBlocked } = useUser();
+  if (loadingUser) return <p>Loading...</p>;
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <title>Pushquery | Where SciComm Happens</title>
@@ -108,27 +110,47 @@ export default function Layout({ children }) {
               )}
             </a>
           </Link>
-          <Link href="/login">
-            <a>
-              {router.pathname == "/login" || router.pathname == "/signup" ? (
-                <div className={LayoutStyles.headerIconBox}>
-                  <UserOutlined
-                    style={{ fontSize: "3rem", color: "#009900" }}
-                  />
-                  <p>Log In</p>
-                </div>
-              ) : (
-                <div className={LayoutStyles.headerIconBox}>
-                  <UserOutlined style={{ fontSize: "3rem", color: "#333" }} />
-                  <p>Log In</p>
-                </div>
-              )}
-            </a>
-          </Link>
+          {user ? (
+            <Link href="/profile">
+              <a>
+                {router.pathname == "/login" || router.pathname == "/signup" ? (
+                  <div className={LayoutStyles.headerIconBox}>
+                    <UserOutlined
+                      style={{ fontSize: "3rem", color: "#009900" }}
+                    />
+                    <p>Me</p>
+                  </div>
+                ) : (
+                  <div className={LayoutStyles.headerIconBox}>
+                    <UserOutlined style={{ fontSize: "3rem", color: "#333" }} />
+                    <p>Me</p>
+                  </div>
+                )}
+              </a>
+            </Link>
+          ) : (
+            <Link href="/login">
+              <a>
+                {router.pathname == "/login" || router.pathname == "/signup" ? (
+                  <div className={LayoutStyles.headerIconBox}>
+                    <UserOutlined
+                      style={{ fontSize: "3rem", color: "#009900" }}
+                    />
+                    <p>Me</p>
+                  </div>
+                ) : (
+                  <div className={LayoutStyles.headerIconBox}>
+                    <UserOutlined style={{ fontSize: "3rem", color: "#333" }} />
+                    <p>Me</p>
+                  </div>
+                )}
+              </a>
+            </Link>
+          )}
         </div>
       </header>
       <main>{children}</main>
-      <footer className={LayoutStyles.footerContainer}>
+      {/* <footer className={LayoutStyles.footerContainer}>
         <div className={LayoutStyles.colItem}>
           <a href="https://twitter.com/pushquery">
             <p>Follow Pushquery</p>
@@ -156,7 +178,7 @@ export default function Layout({ children }) {
             />
           </a>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }

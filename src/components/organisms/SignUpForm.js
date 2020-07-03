@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import firebase from "../../../firebase/clientApp";
-import SignUpStyles from "../../../styles/signup.module.css";
+import LoginStyles from "../../../styles/login.module.css";
 
 export default function SignUpForm() {
   const [email, setEmail] = React.useState("");
@@ -52,44 +52,44 @@ export default function SignUpForm() {
   };
 
   return (
-    <fieldset className={SignUpStyles.fieldset}>
-      <div className={SignUpStyles.container}>
-        <h1 className={SignUpStyles.header}>Log In</h1>
-        <label className={SignUpStyles.label} for="displayName">
+    <fieldset className={LoginStyles.fieldset}>
+      <div className={LoginStyles.container}>
+        <h1 className={LoginStyles.header}>Sign Up</h1>
+        <label className={LoginStyles.label} for="displayName">
           How would you like to be addressed?
         </label>
         <input
-          className={SignUpStyles.textInput}
+          className={LoginStyles.textInput}
           type="text"
           name="displayName"
           value={displayName}
           onChange={(event) => setDisplayName(event.target.value)}
         />
-        <label className={SignUpStyles.label} for="email">
+        <label className={LoginStyles.label} for="email">
           Email
         </label>
         <input
-          className={SignUpStyles.textInput}
+          className={LoginStyles.textInput}
           type="text"
           name="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-        <label className={SignUpStyles.label} for="password">
+        <label className={LoginStyles.label} for="password">
           Password
         </label>
         <input
-          className={SignUpStyles.textInput}
+          className={LoginStyles.textInput}
           type="password"
           name="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
-        <button className={SignUpStyles.button} onClick={SignUp}>
-          <p className={SignUpStyles.buttonText}>SEND</p>
+        <button className={LoginStyles.button} onClick={SignUp}>
+          <p className={LoginStyles.buttonText}>SEND</p>
         </button>
-        <button className={SignUpStyles.buttonSecondary} onClick={NavToLogin}>
-          <p className={SignUpStyles.buttonTextSecondary}>SIGN UP</p>
+        <button className={LoginStyles.buttonSecondary} onClick={NavToLogin}>
+          <p className={LoginStyles.buttonTextSecondary}>LOG IN</p>
         </button>
       </div>
     </fieldset>

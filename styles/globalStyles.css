@@ -31,6 +31,8 @@ footer {
   background-color: #fff;
   width: 100vw;
   border-top: 0.1rem solid #bab6ad;
+  bottom: 0;
+  position: sticky;
 }
 footer p {
   font-size: 1.6rem;

@@ -65,7 +65,7 @@ export default function CreateComponent() {
   return (
     <fieldset className={LoginStyles.fieldset}>
       <div className={LoginStyles.container}>
-        <h1 className={LoginStyles.header}>Log In</h1>
+        <h1 className={LoginStyles.header}>Ready To Create My Next Talk</h1>
         <label className={LoginStyles.label} htmlFor="title">
           The title of your Talk
         </label>
