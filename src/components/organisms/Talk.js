@@ -109,7 +109,7 @@ export default function Talk({ id }) {
   console.log({ user, isBlocked });
 
   // Component will return loading... until the messages load from Firestore
-  if (!messages) return <Text>loading...</Text>;
+  if (!messages) return <div />;
   return (
     <div className={TalkStyles.container}>
       <h1 className={TalkStyles.title}>{talk.title}</h1>

@@ -47,7 +47,7 @@ export default function Home() {
 
     return () => unsubscribe();
   }, []);
-  if (loading) return "loading...";
+  if (loading) return "";
   return (
     <div>
       {talks ? talks.map((talk) => <TalkCover talk={talk} key={talk._id} />) : null}

@@ -14,7 +14,7 @@ import LayoutStyles from "../../../styles/layout.module.css";
 export default function Layout({ children }) {
   const router = useRouter();
   const { loadingUser, user, isBlocked } = useUser();
-  if (loadingUser) return <p>Loading...</p>;
+  if (loadingUser) return <p></p>;
   return (
     <div>
       <Head>
