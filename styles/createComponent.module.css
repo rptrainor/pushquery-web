@@ -87,6 +87,11 @@
   text-align: center;
   font-weight: bold;
 }
+.navBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
 
 @media (min-width: 0px) and (max-width: 567px) {
   .container {

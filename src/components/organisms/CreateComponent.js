@@ -5,9 +5,12 @@ import firebase from "../../../firebase/clientApp";
 import { useUser } from "../../../context/userContext";
 import CreateStyles from "../../../styles/createComponent.module.css";
 import LoginStyles from "../../../styles/login.module.css";
+import PrimaryBtn from "../molecules/primaryBtn";
+import SecondaryBtn from "../molecules/secondaryBtn";
+import PreviewBox from "../molecules/previewBox";
 
 export default function CreateComponent() {
-  const [slides, setSlides] = React.useState([]);
+  const [slides, setSlides] = React.useState([{}, {}, {}, {}, {}]);
   const [slideText, setSlideText] = React.useState("");
   const [slideIndex, setSlideIndex] = React.useState(0);
   const [isImg, setIsImg] = React.useState(false);
@@ -15,13 +18,17 @@ export default function CreateComponent() {
   const router = useRouter();
 
   const addSlide = () => {
-    setSlides([
-      ...slides,
-      {
-        slideText,
-        isImg,
-      },
-    ]);
+    slides[slideIndex].slideText = slideText;
+    setSlideIndex(slideIndex + 1);
+    setSlideText("");
+  };
+
+  const backOneSlide = () => {
+    setSlideIndex(slideIndex - 1);
+    setSlideText("");
+  };
+
+  const forwardOneSlide = () => {
     setSlideIndex(slideIndex + 1);
     setSlideText("");
   };
@@ -46,25 +53,30 @@ export default function CreateComponent() {
       createHeader: "How do you want to conclude your Talk?",
     },
   ];
-  // console.log(createHeaderArray[index].createHeader);
-  console.log(slides);
-  // console.log(slides[index].slideText);
 
   return (
     <div className={CreateStyles.container}>
       <div className={CreateStyles.inputBox}>
-        <div>
+        <div className={CreateStyles.navBox}>
           {slideIndex > 0 ? (
-            <button onClick={() => setSlideIndex(slideIndex - 1)}>
-              back to slide #{slideIndex}
-            </button>
+            <SecondaryBtn
+              onClickFunction={backOneSlide}
+              btnStyles={CreateStyles.buttonSecondary}
+              textStyles={CreateStyles.buttonTextSecondary}
+              BTN_TEXT={`BACK`}
+              slideIndex={slideIndex}
+            />
           ) : (
             <div />
           )}
           {slideIndex < 4 ? (
-            <button onClick={() => setSlideIndex(slideIndex + 1)}>
-              forward to slide #{slideIndex + 2}
-            </button>
+            <SecondaryBtn
+              onClickFunction={forwardOneSlide}
+              btnStyles={CreateStyles.buttonSecondary}
+              textStyles={CreateStyles.buttonTextSecondary}
+              BTN_TEXT={`NEXT`}
+              slideIndex={slideIndex}
+            />
           ) : (
             <div />
           )}
@@ -84,23 +96,20 @@ export default function CreateComponent() {
           maxLength="300"
           onChange={(event) => setSlideText(event.target.value)}
         />
-        <button className={CreateStyles.button} onClick={addSlide}>
-          <p className={CreateStyles.buttonText}>SAVE</p>
-        </button>
-        <h2>OR</h2>
-        <button className={CreateStyles.buttonSecondary} onClick={addSlide}>
-          <p className={CreateStyles.buttonTextSecondary}>UPLOAD AN IMAGE</p>
-        </button>
+        <PrimaryBtn
+          onClickFunction={addSlide}
+          btnStyles={CreateStyles.button}
+          textStyles={CreateStyles.buttonText}
+          BTN_TEXT={"SAVE"}
+        />
       </div>
-      <div className={CreateStyles.previewBox}>
-        <p className={CreateStyles.textFont}>
-          {slideText.length == 0 &&
-          slides[slideIndex] &&
-          slides[slideIndex].slideText
-            ? slides[slideIndex].slideText
-            : slideText}
-        </p>
-      </div>
+      <PreviewBox
+        divStyles={CreateStyles.previewBox}
+        pStyles={CreateStyles.textFont}
+        slideText={slideText}
+        slides={slides}
+        slideIndex={slideIndex}
+      />
     </div>
   );
 }
