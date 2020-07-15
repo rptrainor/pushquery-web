@@ -9,20 +9,23 @@ export default function PreviewBox({
   slideIndex,
   slideImg,
   isUploadFileLoading,
+  isImg,
 }) {
   React.useEffect(() => {
-    slides[slideIndex].slideImg = slideImg;
+    if (slideImg !== "") slides[slideIndex].slideImg = slideImg;
+    // if (isImg === true) slides[slideIndex].isImg = true;
   }, [slideImg]);
+
   if (slides[slideIndex].slideText || slides[slideIndex].slideImg)
     return (
       <div className={divStyles}>
-        {!slides[slideIndex].isImg ? (
+        {!slides[slideIndex].isImg && !slides[slideIndex].slideImg ? (
           <p className={pStyles}>
-            {slides[slideIndex] && slides[slideIndex].slideText ? (
-              slides[slideIndex].slideText
-            ) : (
-              <div />
-            )}
+            {slides[slideIndex] &&
+            slides[slideIndex].slideText &&
+            slideText === ""
+              ? slides[slideIndex].slideText
+              : slideText}
           </p>
         ) : (
           <img

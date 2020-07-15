@@ -14,6 +14,7 @@ export default function ReviewCompletedSlide({
   setIsQuestionAnswered,
   setIsImg,
   isUploadFileLoading,
+  createTalk,
 }) {
   const [reviewSlideIndex, setReviewSlideIndex] = React.useState(0);
 
@@ -72,7 +73,7 @@ export default function ReviewCompletedSlide({
       <button onClick={editSlide} className={CreateStyles.buttonSecondary}>
         <p className={CreateStyles.buttonTextSecondary}>EDIT THIS SLIDE</p>
       </button>
-      <button onClick={forwardOneSlide} className={CreateStyles.button}>
+      <button onClick={createTalk} className={CreateStyles.button}>
         <p className={CreateStyles.buttonText}>PUBLISH TALK</p>
       </button>
     </div>

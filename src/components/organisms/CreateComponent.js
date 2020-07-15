@@ -20,21 +20,57 @@ export default function CreateComponent() {
   const [slideIndex, setSlideIndex] = React.useState(0);
   const [isImg, setIsImg] = React.useState(false);
   const [isQuestionAnswered, setIsQuestionAnswered] = React.useState(false);
-  const [isUploadFileLoading, setIsUploadFileLoading] = React.useState(false)
+  const [isUploadFileLoading, setIsUploadFileLoading] = React.useState(false);
   const { loadingUser, user, isBlocked } = useUser();
   const router = useRouter();
 
-  const addSlide = () => {
-    // if (slideText.length == 0 && slides[slideIndex].slideText) {
+  React.useEffect(() => {
+    if (!user) router.push("/login");
+  }, [user]);
 
-    // }
-    if (!isImg && !slideText.length == 0) {
+  const createTalk = () => {
+    const db = firebase.firestore();
+    if (!isBlocked) {
+      db.collection("talks")
+        .add({
+          slides,
+          createdBy: user.uid,
+          createdOn: new Date().getTime(),
+          flag: {
+            flagged: false,
+          },
+          user: {
+            _id: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          },
+        })
+        .then(async (docRef) => {
+          setSlides([{}, {}, {}, {}, {}]);
+          router.push(`/talk/${docRef.id}`);
+        });
+    } else {
+      alert(
+        "We are sorry, one of your posts has been flagged by our community. We are in the process of reviewing this flag, but until then you will not be allowed to host a Talk.  We appreciate your patience and will email you with more details about this review shortly. Thank you"
+      );
+    }
+  };
+
+  const addSlide = () => {
+    if (!isImg && slideText.length !== 0) {
       slides[slideIndex].slideText = slideText;
       slides[slideIndex].isImg = false;
     }
-    if (isImg && !slideImg.length == 0) {
+    if (isImg && slideImg.length !== 0) {
       slides[slideIndex].slideImg = slideImg;
       slides[slideIndex].isImg = true;
+    }
+    if (slideIndex !== 4 && !slides[slideIndex + 1].isImg) {
+      setIsImg(false);
+    }
+    if (slideIndex !== 4 && slides[slideIndex + 1].isImg) {
+      setIsImg(true);
     }
     setIsQuestionAnswered(false);
     setSlideIndex(slideIndex + 1);
@@ -44,7 +80,7 @@ export default function CreateComponent() {
 
   async function uploadFile(event) {
     event.preventDefault();
-    setIsUploadFileLoading(true)
+    setIsUploadFileLoading(true);
     console.log("uploading file...");
     const files = event.target.files;
     const data = new FormData();
@@ -61,10 +97,17 @@ export default function CreateComponent() {
     const file = await res.json();
     console.log(file);
     setSlideImg(file.secure_url);
-    setIsUploadFileLoading(false)
+    setIsUploadFileLoading(false);
   }
 
-  console.log({ slides, slideIndex, slideText, slideImg, isImg });
+  console.log({
+    slides,
+    slideIndex,
+    slideText,
+    slideImg,
+    isImg,
+    isQuestionAnswered,
+  });
 
   const createHeaderArray = [
     {
@@ -110,11 +153,13 @@ export default function CreateComponent() {
         setIsQuestionAnswered={setIsQuestionAnswered}
         setIsImg={setIsImg}
         isUploadFileLoading={isUploadFileLoading}
+        createTalk={createTalk}
       />
     );
   return (
     <div className={CreateStyles.container}>
-      {!isImg && !slides[slideIndex].isImg ? (
+      {!isImg ||
+      (slides[slideIndex].slideText && !slides[slideIndex].slideImg) ? (
         <CreateTextSlide
           CreateStyles={CreateStyles}
           createHeaderArray={createHeaderArray}
@@ -143,6 +188,7 @@ export default function CreateComponent() {
         slideIndex={slideIndex}
         slideImg={slideImg}
         isUploadFileLoading={isUploadFileLoading}
+        isImg={isImg}
       />
     </div>
   );
