@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "react-loader-spinner";
 import QuestionStyles from "../../../styles/isImgQuestion.module.css";
 export default function PreviewBox({
   divStyles,
@@ -7,11 +8,15 @@ export default function PreviewBox({
   slides,
   slideIndex,
   slideImg,
+  isUploadFileLoading,
 }) {
+  React.useEffect(() => {
+    slides[slideIndex].slideImg = slideImg;
+  }, [slideImg]);
   if (slides[slideIndex].slideText || slides[slideIndex].slideImg)
     return (
       <div className={divStyles}>
-      {!slides[slideIndex].isImg ? (
+        {!slides[slideIndex].isImg ? (
           <p className={pStyles}>
             {slides[slideIndex] && slides[slideIndex].slideText ? (
               slides[slideIndex].slideText
@@ -31,6 +36,12 @@ export default function PreviewBox({
             }
           />
         )}
+      </div>
+    );
+  if (isUploadFileLoading)
+    return (
+      <div className={divStyles}>
+        <Loader type="TailSpin" color="#fff" height={100} width={100} />
       </div>
     );
   return (

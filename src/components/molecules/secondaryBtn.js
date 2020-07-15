@@ -5,10 +5,10 @@ export default function SecondaryBtn({
   btnStyles,
   textStyles,
   BTN_TEXT,
-  slideIndex
+  isUploadFileLoading
 }) {
   return (
-    <button className={btnStyles} onClick={onClickFunction}>
+    <button className={btnStyles} onClick={onClickFunction} disabled={isUploadFileLoading}>
       <p className={textStyles}>{BTN_TEXT}</p>
     </button>
   );

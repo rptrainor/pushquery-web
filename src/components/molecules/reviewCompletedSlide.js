@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "react-loader-spinner";
 import CreateStyles from "../../../styles/createComponent.module.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import ReviewBox from "./reviewBox";
@@ -11,7 +12,8 @@ export default function ReviewCompletedSlide({
   slideImg,
   setSlideIndex,
   setIsQuestionAnswered,
-  setIsImg
+  setIsImg,
+  isUploadFileLoading,
 }) {
   const [reviewSlideIndex, setReviewSlideIndex] = React.useState(0);
 
@@ -33,6 +35,14 @@ export default function ReviewCompletedSlide({
     }
   };
 
+  if (isUploadFileLoading)
+    return (
+      <div className={CreateStyles.reviewContainer}>
+        <div className={CreateStyles.reviewBox}>
+          <Loader type="TailSpin" color="#fff" height={100} width={100} />
+        </div>
+      </div>
+    );
   return (
     <div className={CreateStyles.reviewContainer}>
       <div className={CreateStyles.reviewBox}>
@@ -59,10 +69,7 @@ export default function ReviewCompletedSlide({
         slideIndex={reviewSlideIndex}
         slideImg={slideImg}
       />
-      <button
-        onClick={editSlide}
-        className={CreateStyles.buttonSecondary}
-      >
+      <button onClick={editSlide} className={CreateStyles.buttonSecondary}>
         <p className={CreateStyles.buttonTextSecondary}>EDIT THIS SLIDE</p>
       </button>
       <button onClick={forwardOneSlide} className={CreateStyles.button}>

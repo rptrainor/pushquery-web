@@ -7,6 +7,7 @@ export default function CreateImgSlide({
   SecondaryBtn,
   addSlide,
   uploadFile,
+  isUploadFileLoading,
 }) {
   return (
     <div className={CreateStyles.inputBox}>
@@ -20,10 +21,12 @@ export default function CreateImgSlide({
           className={CreateStyles.customFileInput}
           id="image"
           name="image"
+          disabled={isUploadFileLoading}
           onChange={(event) => uploadFile(event)}
         />
       </label>
       <SecondaryBtn
+        isUploadFileLoading={isUploadFileLoading}
         onClickFunction={addSlide}
         btnStyles={CreateStyles.buttonSecondary}
         textStyles={CreateStyles.buttonTextSecondary}

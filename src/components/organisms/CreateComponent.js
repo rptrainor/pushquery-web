@@ -20,6 +20,7 @@ export default function CreateComponent() {
   const [slideIndex, setSlideIndex] = React.useState(0);
   const [isImg, setIsImg] = React.useState(false);
   const [isQuestionAnswered, setIsQuestionAnswered] = React.useState(false);
+  const [isUploadFileLoading, setIsUploadFileLoading] = React.useState(false)
   const { loadingUser, user, isBlocked } = useUser();
   const router = useRouter();
 
@@ -43,6 +44,7 @@ export default function CreateComponent() {
 
   async function uploadFile(event) {
     event.preventDefault();
+    setIsUploadFileLoading(true)
     console.log("uploading file...");
     const files = event.target.files;
     const data = new FormData();
@@ -59,6 +61,7 @@ export default function CreateComponent() {
     const file = await res.json();
     console.log(file);
     setSlideImg(file.secure_url);
+    setIsUploadFileLoading(false)
   }
 
   console.log({ slides, slideIndex, slideText, slideImg, isImg });
@@ -106,6 +109,7 @@ export default function CreateComponent() {
         setSlideIndex={setSlideIndex}
         setIsQuestionAnswered={setIsQuestionAnswered}
         setIsImg={setIsImg}
+        isUploadFileLoading={isUploadFileLoading}
       />
     );
   return (
@@ -128,6 +132,7 @@ export default function CreateComponent() {
           SecondaryBtn={SecondaryBtn}
           addSlide={addSlide}
           uploadFile={uploadFile}
+          isUploadFileLoading={isUploadFileLoading}
         />
       )}
       <PreviewBox
@@ -137,6 +142,7 @@ export default function CreateComponent() {
         slides={slides}
         slideIndex={slideIndex}
         slideImg={slideImg}
+        isUploadFileLoading={isUploadFileLoading}
       />
     </div>
   );
