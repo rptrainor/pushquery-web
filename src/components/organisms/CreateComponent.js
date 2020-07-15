@@ -9,6 +9,9 @@ import PrimaryBtn from "../molecules/primaryBtn";
 import SecondaryBtn from "../molecules/secondaryBtn";
 import PreviewBox from "../molecules/previewBox";
 import IsImgQuestion from "../molecules/isImgQuestion";
+import CreateTextSlide from "../molecules/createTextSlide";
+import CreateImgSlide from "../molecules/createImgSlide";
+import ReviewCompletedSlide from "../molecules/reviewCompletedSlide";
 
 export default function CreateComponent() {
   const [slides, setSlides] = React.useState([{}, {}, {}, {}, {}]);
@@ -21,11 +24,14 @@ export default function CreateComponent() {
   const router = useRouter();
 
   const addSlide = () => {
-    if (!isImg) {
+    // if (slideText.length == 0 && slides[slideIndex].slideText) {
+
+    // }
+    if (!isImg && !slideText.length == 0) {
       slides[slideIndex].slideText = slideText;
       slides[slideIndex].isImg = false;
     }
-    if (isImg) {
+    if (isImg && !slideImg.length == 0) {
       slides[slideIndex].slideImg = slideImg;
       slides[slideIndex].isImg = true;
     }
@@ -33,16 +39,6 @@ export default function CreateComponent() {
     setSlideIndex(slideIndex + 1);
     setSlideText("");
     setSlideImg("");
-  };
-
-  const backOneSlide = () => {
-    setSlideIndex(slideIndex - 1);
-    setSlideText("");
-  };
-
-  const forwardOneSlide = () => {
-    setSlideIndex(slideIndex + 1);
-    setSlideText("");
   };
 
   async function uploadFile(event) {
@@ -65,7 +61,7 @@ export default function CreateComponent() {
     setSlideImg(file.secure_url);
   }
 
-  console.log({ slides, slideIndex, slideText, slideImg });
+  console.log({ slides, slideIndex, slideText, slideImg, isImg });
 
   const createHeaderArray = [
     {
@@ -86,86 +82,53 @@ export default function CreateComponent() {
     },
   ];
 
-  if (!isQuestionAnswered)
+  if (
+    !isQuestionAnswered &&
+    slideIndex !== 5 &&
+    !slides[slideIndex].slideText &&
+    !slides[slideIndex].slideImg
+  )
     return (
       <IsImgQuestion
         setIsImg={setIsImg}
         setIsQuestionAnswered={setIsQuestionAnswered}
       />
     );
+  if (slideIndex == 5)
+    return (
+      <ReviewCompletedSlide
+        setSlideIndex={setSlideIndex}
+        divStyles={CreateStyles.previewBox}
+        pStyles={CreateStyles.textFont}
+        slideText={slideText}
+        slides={slides}
+        slideImg={slideImg}
+        setSlideIndex={setSlideIndex}
+        setIsQuestionAnswered={setIsQuestionAnswered}
+        setIsImg={setIsImg}
+      />
+    );
   return (
     <div className={CreateStyles.container}>
-      {!isImg ? (
-        <div className={CreateStyles.inputBox}>
-          <h1 className={CreateStyles.header}>
-            {createHeaderArray[slideIndex].createHeader}
-          </h1>
-
-          <label className={CreateStyles.label} htmlFor="description">
-            300 character limit
-          </label>
-          <textarea
-            className={CreateStyles.textInput}
-            name="text"
-            value={slideText}
-            rows="8"
-            maxLength="300"
-            onChange={(event) => setSlideText(event.target.value)}
-          />
-          <PrimaryBtn
-            onClickFunction={addSlide}
-            btnStyles={CreateStyles.button}
-            textStyles={CreateStyles.buttonText}
-            BTN_TEXT={"SAVE"}
-          />
-          {/* <div className={CreateStyles.navBox}>
-            {slideIndex > 0 ? (
-              <SecondaryBtn
-                onClickFunction={backOneSlide}
-                btnStyles={CreateStyles.buttonSecondary}
-                textStyles={CreateStyles.buttonTextSecondary}
-                BTN_TEXT={`BACK`}
-                slideIndex={slideIndex}
-              />
-            ) : (
-              <div />
-            )}
-            {slideIndex < 4 ? (
-              <SecondaryBtn
-                onClickFunction={forwardOneSlide}
-                btnStyles={CreateStyles.buttonSecondary}
-                textStyles={CreateStyles.buttonTextSecondary}
-                BTN_TEXT={`NEXT`}
-                slideIndex={slideIndex}
-              />
-            ) : (
-              <div />
-            )}
-          </div> */}
-        </div>
+      {!isImg && !slides[slideIndex].isImg ? (
+        <CreateTextSlide
+          CreateStyles={CreateStyles}
+          createHeaderArray={createHeaderArray}
+          slideIndex={slideIndex}
+          slideText={slideText}
+          PrimaryBtn={PrimaryBtn}
+          addSlide={addSlide}
+          setSlideText={setSlideText}
+        />
       ) : (
-        <div className={CreateStyles.inputBox}>
-          <h1 className={CreateStyles.header}>
-            {createHeaderArray[slideIndex].createHeader}
-          </h1>
-          <h2>What is a good image or figure for your talk?</h2>
-          <label htmlFor="image" className="file">
-            UPLOAD
-            <input
-              type="file"
-              className="custom-file-input"
-              id="image"
-              name="image"
-              onChange={(event) => uploadFile(event)}
-            />
-          </label>
-          <SecondaryBtn
-            onClickFunction={addSlide}
-            btnStyles={CreateStyles.button}
-            textStyles={CreateStyles.buttonText}
-            BTN_TEXT={"SAVE"}
-          />
-        </div>
+        <CreateImgSlide
+          CreateStyles={CreateStyles}
+          createHeaderArray={createHeaderArray}
+          slideIndex={slideIndex}
+          SecondaryBtn={SecondaryBtn}
+          addSlide={addSlide}
+          uploadFile={uploadFile}
+        />
       )}
       <PreviewBox
         divStyles={CreateStyles.previewBox}

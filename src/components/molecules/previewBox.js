@@ -8,6 +8,31 @@ export default function PreviewBox({
   slideIndex,
   slideImg,
 }) {
+  if (slides[slideIndex].slideText || slides[slideIndex].slideImg)
+    return (
+      <div className={divStyles}>
+      {!slides[slideIndex].isImg ? (
+          <p className={pStyles}>
+            {slides[slideIndex] && slides[slideIndex].slideText ? (
+              slides[slideIndex].slideText
+            ) : (
+              <div />
+            )}
+          </p>
+        ) : (
+          <img
+            className={QuestionStyles.img}
+            src={
+              slides[slideIndex] && slides[slideIndex].slideImg ? (
+                slides[slideIndex].slideImg
+              ) : (
+                <div />
+              )
+            }
+          />
+        )}
+      </div>
+    );
   return (
     <div className={divStyles}>
       {!slideImg ? (

@@ -18,7 +18,7 @@
 .previewBox {
   width: 36rem;
   height: 64rem;
-  background-color: #e70000;
+  background-color: #009900;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
@@ -54,7 +54,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  background-color: green;
+  background-color: #009900;
   margin: 0.5rem;
   padding: 0.5rem;
   height: 5rem;
@@ -96,6 +96,51 @@
   flex-wrap: nowrap;
   width: 100%;
 }
+.file {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  background-color: #009900;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  height: 5rem;
+  border: 0;
+  width: 100%;
+  color: #fff;
+  font-size: 3rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+.customFileInput {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+.reviewContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  margin-top: 2rem;
+}
+.reviewBtn {
+  border: 0;
+  background-color: #f2eee4;
+}
+.reviewBox {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 @media (min-width: 0px) and (max-width: 567px) {
   .container {
@@ -104,6 +149,12 @@
   .inputBox {
     min-width: 80vw;
     max-width: 100vw;
+    margin: 0;
+  }
+  .previewBox {
+    width: 100%;
+    /* height: calc(var(--width) * 36%); */
+    margin-top: 1rem;
   }
 }
 @media (min-width: 568px) and (max-width: 767px) {
