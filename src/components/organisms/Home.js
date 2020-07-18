@@ -1,6 +1,6 @@
 import React from "react";
 import firebase from "../../../firebase/clientApp";
-import TalkCover from "./TalkCover";
+import TalkCover2 from "./TalkCover2";
 
 export default function Home() {
   const [talks, setTalks] = React.useState([]);
@@ -11,7 +11,7 @@ export default function Home() {
     const unsubscribe = firebase
       .firestore()
       .collection("talks")
-      .where("flag.flagged", "==", false)
+      .where("flag.flagged", "==", true)
       .orderBy("createdOn", "asc")
       .onSnapshot((querySnapshot) => {
         const talks = querySnapshot.docs.map((doc) => {
@@ -38,7 +38,7 @@ export default function Home() {
         });
 
         setTalks(talks);
-        console.log(talks);
+        // console.log(talks);
 
         if (loading) {
           setLoading(false);
@@ -47,10 +47,12 @@ export default function Home() {
 
     return () => unsubscribe();
   }, []);
+
+
   if (loading) return "";
   return (
     <div>
-      {talks ? talks.map((talk) => <TalkCover talk={talk} key={talk._id} />) : null}
+      {talks ? talks.map((talk) => <TalkCover2 talk={talk} key={talk._id} />) : null}
     </div>
   );
 }

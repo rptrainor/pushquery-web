@@ -41,6 +41,7 @@ export default function PreviewBox({
         )}
       </div>
     );
+
   if (isUploadFileLoading)
     return (
       <div className={divStyles}>

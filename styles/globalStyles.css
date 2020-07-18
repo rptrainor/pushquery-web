@@ -6,7 +6,7 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
-  background-color: #f2eee4;
+  background-color: #FEF7E6;
 }
 *,
 *:before,
@@ -18,7 +18,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f2eee4;
+  background-color: #FEF7E6;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -26,27 +26,6 @@ header {
   background-color: #fff;
   width: 100vw;
   border-bottom: 0.1rem solid #bab6ad;
-}
-footer {
-  background-color: #fff;
-  width: 100vw;
-  border-top: 0.1rem solid #bab6ad;
-  bottom: 0;
-  position: sticky;
-}
-footer p {
-  font-size: 1.6rem;
-  /* margin: 0.5rem 0 0.5rem 0; */
-  color: #005eae;
-  font-family: "Open Sans", sans-serif;
-}
-footer a {
-  margin: 0;
-  padding: 0;
-  font-size: 2rem;
-  font-family: "Open Sans", sans-serif;
-  cursor: pointer;
-  color: #005eae;
 }
 body {
   font-size: 1rem;
@@ -66,7 +45,7 @@ img {
 a {
   text-decoration: none;
   /* color: #005eae;
-  background-color: #f2eee4;
+  background-color: #FEF7E6;
   font-size: 2rem;
   margin: 0.25rem;
   padding: 0.5rem; */
@@ -113,7 +92,7 @@ a {
 }
 h1 {
   color: #009900;
-  background-color: #f2eee4;
+  background-color: #FEF7E6;
   font-family: "Lato", sans-serif;
   font-size: 2.75rem;
   font-weight: 700;
@@ -122,7 +101,7 @@ h1 {
 }
 h2 {
   color: #009900;
-  background-color: #f2eee4;
+  background-color: #FEF7E6;
   font-family: "Open Sans", sans-serif;
   font-size: 2rem;
   font-weight: 600;
@@ -131,7 +110,7 @@ h2 {
 }
 h3 {
   color: #009900;
-  background-color: #f2eee4;
+  background-color: #FEF7E6;
   font-family: "Open Sans", sans-serif;
   font-size: 2.25rem;
   font-weight: 500;
@@ -144,7 +123,7 @@ li,
 label {
   font-family: "Open Sans", sans-serif;
   color: #333;
-  /* background-color: #f2eee4; */
+  /* background-color: #FEF7E6; */
   font-weight: 400;
   font-size: 1.8rem;
   line-height: 1.45;
