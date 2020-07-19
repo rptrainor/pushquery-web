@@ -6,7 +6,7 @@ import firebase from "../../../firebase/clientApp";
 
 import TalkCoverStyles from "../../../styles/talkCover.module.css";
 
-const slideMachine = Machine({
+export const slideMachine = Machine({
   id: "slide",
   initial: "view",
   states: {
@@ -20,26 +20,46 @@ const slideMachine = Machine({
       initial: "0",
       states: {
         "0": {
+          on: {
+            PAUSE: "0",
+            PLAY: "1",
+          },
           after: {
             3000: "1",
           },
         },
         "1": {
+          on: {
+            PAUSE: "1",
+            PLAY: "2",
+          },
           after: {
             3000: "2",
           },
         },
         "2": {
+          on: {
+            PAUSE: "2",
+            PLAY: "3",
+          },
           after: {
             3000: "3",
           },
         },
         "3": {
+          on: {
+            PAUSE: "3",
+            PLAY: "4",
+          },
           after: {
             3000: "4",
           },
         },
         "4": {
+          on: {
+            PAUSE: "4",
+            PLAY: "0",
+          },
           after: {
             3000: "0",
           },
@@ -54,14 +74,21 @@ export default function TalkCover2({ talk }) {
   // console.log(talk.slides);
   console.log(state.value.view);
   return (
-    <div className={TalkCoverStyles.background}>
-      {talk && talk.slides && talk.slides[state.value.view].isImg ? (
-        <img src={talk.slides[state.value.view].slideImg} />
-      ) : (
-        <p className={TalkCoverStyles.textFont}>
-          {talk.slides[state.value.view].slideText}
-        </p>
-      )}
-    </div>
+    <Link href="/talk/[id]" as={`/talk/${talk._id}`}>
+      <a>
+        <div className={TalkCoverStyles.background}>
+          {talk && talk.slides && talk.slides[state.value.view].isImg ? (
+            <img
+              src={talk.slides[state.value.view].slideImg}
+              className={TalkCoverStyles.img}
+            />
+          ) : (
+            <p className={TalkCoverStyles.textFont}>
+              {talk.slides[state.value.view].slideText}
+            </p>
+          )}
+        </div>
+      </a>
+    </Link>
   );
 }

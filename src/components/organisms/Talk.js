@@ -5,11 +5,13 @@ import { useUser } from "../../../context/userContext";
 import firebase from "../../../firebase/clientApp";
 import TalkMsg from "./TalkMsg";
 import TalkStyles from "../../../styles/talk.module.css";
+import TalkSlideShow from "../molecules/TalkSlideShow";
 
 export default function Talk({ id }) {
   const [messages, setMessages] = React.useState([]);
   const [talk, setTalk] = React.useState({});
   const [inputText, setInputText] = React.useState("");
+  const [showSlideShow, setShowSlideShow] = React.useState(false);
   const { loadingUser, user, isBlocked } = useUser();
   const router = useRouter();
 
@@ -22,7 +24,7 @@ export default function Talk({ id }) {
       .collection("talks")
       .doc(id)
       .collection("messages")
-      .where("flag.flagged", "==", false)
+      .where("flag.flagged", "==", true)
       .orderBy("createdAt", "asc")
       .onSnapshot((querySnapshot) => {
         const messages = querySnapshot.docs.map((doc) => {
@@ -49,6 +51,7 @@ export default function Talk({ id }) {
           return data;
         });
         setMessages(messages);
+        console.log({ messages });
       });
 
     // pulls the talk from Firestore
@@ -106,28 +109,51 @@ export default function Talk({ id }) {
     router.push("/");
   };
 
-  console.log({ user, isBlocked });
+  console.log({ talk });
 
   // Component will return loading... until the messages load from Firestore
-  if (!messages) return <div />;
+  if (!talk.slides) return <div />;
   return (
     <div className={TalkStyles.container}>
-      <h1 className={TalkStyles.title}>{talk.title}</h1>
-      <div className={TalkStyles.msgList}>
-        {messages
-          ? messages.map((message) => (
-              <TalkMsg message={message} key={message._id} />
-            ))
-          : null}
-      </div>
-      <>
-        {!user ? (
-          <Link href="/login">
-            <a>
+      <button
+        className={TalkStyles.toggleBbutton}
+        onClick={() => setShowSlideShow(!showSlideShow)}
+      >
+        <p className={TalkStyles.toggleButtonText}>
+          {!showSlideShow ? "SHOW SLIDES" : "SHOW CONVERSATION"}
+        </p>
+      </button>
+      {!showSlideShow ? (
+        <>
+          <div className={TalkStyles.msgList}>
+            {messages
+              ? messages.map((message) => (
+                  <TalkMsg message={message} key={message._id} />
+                ))
+              : null}
+          </div>
+          <>
+            {!user ? (
+              <Link href="/login">
+                <a>
+                  <div className={TalkStyles.msgBox}>
+                    <textarea
+                      className={TalkStyles.textInput}
+                      onChange={(event) => setInputText(event.target.value)}
+                      value={inputText}
+                      placeholder="What are you curious about?"
+                    />
+                    <button
+                      className={TalkStyles.button}
+                      onClick={handleMsgSend}
+                    >
+                      <p className={TalkStyles.buttonText}>SEND</p>
+                    </button>
+                  </div>
+                </a>
+              </Link>
+            ) : (
               <div className={TalkStyles.msgBox}>
-                {/* <p className={TalkStyles.warningText}>
-                You must be logged in to join the converstion
-              </p> */}
                 <textarea
                   className={TalkStyles.textInput}
                   onChange={(event) => setInputText(event.target.value)}
@@ -138,22 +164,12 @@ export default function Talk({ id }) {
                   <p className={TalkStyles.buttonText}>SEND</p>
                 </button>
               </div>
-            </a>
-          </Link>
-        ) : (
-          <div className={TalkStyles.msgBox}>
-            <textarea
-              className={TalkStyles.textInput}
-              onChange={(event) => setInputText(event.target.value)}
-              value={inputText}
-              placeholder="What are you curious about?"
-            />
-            <button className={TalkStyles.button} onClick={handleMsgSend}>
-              <p className={TalkStyles.buttonText}>SEND</p>
-            </button>
-          </div>
-        )}
-      </>
+            )}
+          </>
+        </>
+      ) : (
+        <TalkSlideShow slides={talk.slides} />
+      )}
     </div>
   );
 }
