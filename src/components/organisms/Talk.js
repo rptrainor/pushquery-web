@@ -116,7 +116,7 @@ export default function Talk({ id }) {
   return (
     <div className={TalkStyles.container}>
       <button
-        className={TalkStyles.toggleBbutton}
+        className={TalkStyles.toggleButton}
         onClick={() => setShowSlideShow(!showSlideShow)}
       >
         <p className={TalkStyles.toggleButtonText}>

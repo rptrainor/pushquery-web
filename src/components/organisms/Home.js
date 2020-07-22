@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from "../../../firebase/clientApp";
+import TalkSlideShow from "../molecules/TalkSlideShow";
 import TalkCover2 from "./TalkCover2";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
   const [lastDoc, setLastDoc] = React.useState({});
   const [loading, setLoading] = React.useState(true);
   const [isMoreLoading, setIsMoreLoading] = React.useState(false);
+  const [currentTalkIndex, setCurrentTalkIndex] = React.useState(0);
 
   const talksRef = firebase.firestore().collection("talks");
 
@@ -44,7 +46,7 @@ export default function Home() {
       setTimeout(async () => {
         let snapshot = await talksRef
           .orderBy("id")
-          .startAfter("BBQXX2UZMa9GuGQiu4tL")
+          .startAfter(lastDoc.data().id)
           .limit(1)
           .get();
 
@@ -58,7 +60,8 @@ export default function Home() {
           }
 
           setTalks(newTalks);
-          if (snapshot.docs.length < 3) setLastDoc(null);
+          setCurrentTalkIndex(currentTalkIndex + 1);
+          // if (snapshot.docs.length < 1) setLastDoc(null);
         } else {
           setLastDoc(null);
         }
@@ -68,14 +71,22 @@ export default function Home() {
     }
   };
 
-  console.log(talks, lastDoc);
+  console.log(talks[currentTalkIndex]);
+  console.log(currentTalkIndex);
 
   if (loading || isMoreLoading) return "";
   return (
     <div>
-      <h1>Hola</h1>
-      <button onClick={NextTalk}>MAS</button>
-      {/* {talks ? talks.map((talk) => <TalkCover2 talk={talk} key={talk._id} />) : null} */}
+      {talks[currentTalkIndex] && talks[currentTalkIndex].slides ? (
+        <>
+          <TalkCover2
+            slides={talks[currentTalkIndex].slides}
+            id={talks[currentTalkIndex].id}
+          />
+        </>
+      ) : (
+        <button onClick={NextTalk}>mas</button>
+      )}
     </div>
   );
 }

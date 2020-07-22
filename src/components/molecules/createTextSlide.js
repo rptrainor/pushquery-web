@@ -16,14 +16,14 @@ export default function CreateTextSlide({
       </h1>
 
       <label className={CreateStyles.label} htmlFor="description">
-        300 character limit
+        280 character limit
       </label>
       <textarea
         className={CreateStyles.textInput}
         name="text"
         value={slideText}
         rows="8"
-        maxLength="300"
+        maxLength="280"
         onChange={(event) => setSlideText(event.target.value)}
       />
       <PrimaryBtn

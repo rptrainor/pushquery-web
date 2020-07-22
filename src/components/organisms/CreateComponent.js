@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import firebase from "../../../firebase/clientApp";
 import { useUser } from "../../../context/userContext";
 import CreateStyles from "../../../styles/createComponent.module.css";
-import LoginStyles from "../../../styles/login.module.css";
 import PrimaryBtn from "../molecules/primaryBtn";
 import SecondaryBtn from "../molecules/secondaryBtn";
 import PreviewBox from "../molecules/previewBox";
@@ -12,7 +11,6 @@ import IsImgQuestion from "../molecules/isImgQuestion";
 import CreateTextSlide from "../molecules/createTextSlide";
 import CreateImgSlide from "../molecules/createImgSlide";
 import ReviewCompletedSlide from "../molecules/reviewCompletedSlide";
-import { Machine } from "xstate";
 
 export default function CreateComponent() {
   const [slides, setSlides] = React.useState([{}, {}, {}, {}, {}]);
@@ -48,6 +46,9 @@ export default function CreateComponent() {
           },
         })
         .then(async (docRef) => {
+          db.collection("talks").doc(docRef.id).update({
+            id: docRef.id,
+          });
           setSlides([{}, {}, {}, {}, {}]);
           router.push(`/talk/${docRef.id}`);
         });
@@ -194,49 +195,3 @@ export default function CreateComponent() {
     </div>
   );
 }
-
-// I ACCIDENTLY BUILT THIS MACHINE
-// FOR THE CREATE COMPONENT
-//
-// const slideMachine = Machine({
-//   id: "slide",
-//   initial: "slide0",
-//   states: {
-//     slide0: {
-//       on: { NEXT: "slide1" },
-//     },
-//     slide1: {
-//       on: { NEXT: "slide2" },
-//     },
-//     slide2: {
-//       on: { NEXT: "slide3" },
-//     },
-//     slide3: {
-//       on: { NEXT: "slide4" },
-//     },
-//     slide4: {
-//       on: { NEXT: "review" },
-//     },
-//     review: {
-//       on: { PUBLISH: "publish", EDIT: "editslide0" },
-//     },
-//     editslide0: {
-//       on: { NEXT: "editslide1" },
-//     },
-//     editslide1: {
-//       on: { NEXT: "editslide2" },
-//     },
-//     editslide2: {
-//       on: { NEXT: "editslide3" },
-//     },
-//     editslide3: {
-//       on: { NEXT: "editslide4" },
-//     },
-//     editslide4: {
-//       on: { NEXT: "review" },
-//     },
-//     publish: {
-//       type: "final",
-//     },
-//   },
-// });
