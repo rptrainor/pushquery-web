@@ -1,9 +1,11 @@
 import React from "react";
-import QuestionStyles from "../../../styles/isImgQuestion.module.css";
-import CreateStyles from "../../../styles/createComponent.module.css";
-import PrimaryBtn from "../molecules/primaryBtn";
 
-export default function IsImgQuestion({ setIsImg, setIsQuestionAnswered }) {
+export default function IsImgQuestion({
+  setIsImg,
+  setIsQuestionAnswered,
+  PrimaryButton,
+  ContainersCSS,
+}) {
   const setToTest = () => {
     setIsQuestionAnswered(true);
     setIsImg(false);
@@ -14,22 +16,14 @@ export default function IsImgQuestion({ setIsImg, setIsQuestionAnswered }) {
   };
 
   return (
-    <div className={QuestionStyles.container}>
-      <h1>Would you like to create a Text or Image slide?</h1>
-      <div className={QuestionStyles.questionBox}>
-        <PrimaryBtn
-          onClickFunction={setToTest}
-          btnStyles={CreateStyles.button}
-          textStyles={CreateStyles.buttonText}
-          BTN_TEXT={" TEXT "}
-        />
+    <div className={ContainersCSS.FlexColCenteredContainer}>
+      <h1>
+        <center>Would you like to create a Text or Image slide?</center>
+      </h1>
+      <div className={ContainersCSS.questionBox}>
+        <PrimaryButton onClickFunction={setToTest} buttonText={" TEXT "} />
         <h2>OR</h2>
-        <PrimaryBtn
-          onClickFunction={setToImg}
-          btnStyles={CreateStyles.button}
-          textStyles={CreateStyles.buttonText}
-          BTN_TEXT={"IMAGE"}
-        />
+        <PrimaryButton onClickFunction={setToImg} buttonText={"IMAGE"} />
       </div>
     </div>
   );

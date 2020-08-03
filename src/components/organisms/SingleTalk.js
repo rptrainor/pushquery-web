@@ -3,15 +3,20 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useUser } from "../../../context/userContext";
 import firebase from "../../../firebase/clientApp";
-import TalkMsg from "./TalkMsg";
-import TalkStyles from "../../../styles/talk.module.css";
-import TalkSlideShow from "../molecules/TalkSlideShow";
 
-export default function Talk({ id }) {
+// Component imports
+import SpinLoader from "../atoms/SpinLoader";
+
+// Style imports
+import ContainersCSS from "../../../styles/containers.module.css";
+import TalkCSS from "../../../styles/talk.module.css";
+import SingleComment from "./SingleComment";
+import PrimaryButton from "../atoms/PrimaryButton";
+
+export default function SingleTalk({ id }) {
   const [messages, setMessages] = React.useState([]);
   const [talk, setTalk] = React.useState({});
   const [inputText, setInputText] = React.useState("");
-  const [showSlideShow, setShowSlideShow] = React.useState(false);
   const { loadingUser, user, isBlocked } = useUser();
   const router = useRouter();
 
@@ -24,7 +29,7 @@ export default function Talk({ id }) {
       .collection("talks")
       .doc(id)
       .collection("messages")
-      .where("flag.flagged", "==", true)
+      .where("flag.flagged", "==", false)
       .orderBy("createdAt", "asc")
       .onSnapshot((querySnapshot) => {
         const messages = querySnapshot.docs.map((doc) => {
@@ -51,7 +56,6 @@ export default function Talk({ id }) {
           return data;
         });
         setMessages(messages);
-        console.log({ messages });
       });
 
     // pulls the talk from Firestore
@@ -109,67 +113,55 @@ export default function Talk({ id }) {
     router.push("/");
   };
 
-  console.log({ talk });
+  console.log({ user, isBlocked, talk });
 
-  // Component will return loading... until the messages load from Firestore
-  if (!talk.slides) return <div />;
+  // WAITING FOR MESSAGE AND USER TO LOAD
+  if (!messages || loadingUser) return <SpinLoader />;
   return (
-    <div className={TalkStyles.container}>
-      <button
-        className={TalkStyles.toggleButton}
-        onClick={() => setShowSlideShow(!showSlideShow)}
-      >
-        <p className={TalkStyles.toggleButtonText}>
-          {!showSlideShow ? "SHOW SLIDES" : "SHOW CONVERSATION"}
-        </p>
-      </button>
-      {!showSlideShow ? (
-        <>
-          <div className={TalkStyles.msgList}>
-            {messages
-              ? messages.map((message) => (
-                  <TalkMsg message={message} key={message._id} />
-                ))
-              : null}
-          </div>
-          <>
-            {!user ? (
-              <Link href="/login">
-                <a>
-                  <div className={TalkStyles.msgBox}>
-                    <textarea
-                      className={TalkStyles.textInput}
-                      onChange={(event) => setInputText(event.target.value)}
-                      value={inputText}
-                      placeholder="What are you curious about?"
-                    />
-                    <button
-                      className={TalkStyles.button}
-                      onClick={handleMsgSend}
-                    >
-                      <p className={TalkStyles.buttonText}>SEND</p>
-                    </button>
-                  </div>
-                </a>
-              </Link>
-            ) : (
-              <div className={TalkStyles.msgBox}>
+    <div className={ContainersCSS.FlexColStartOnTopContainer}>
+      <div className={TalkCSS.msgList}>
+        {/* WE NEED TO DO SINGLE COMMENT ONCE WE HAVE USE LOGIN BUILT */}
+        {messages ? (
+          messages.map((message) => (
+            <SingleComment message={message} key={message._id} />
+          ))
+        ) : (
+          <div />
+        )}
+      </div>
+      <>
+        {!user ? (
+          <Link href="login">
+            <a>
+              <div className={TalkCSS.msgBox}>
                 <textarea
-                  className={TalkStyles.textInput}
+                  className={TalkCSS.textInput}
                   onChange={(event) => setInputText(event.target.value)}
                   value={inputText}
                   placeholder="What are you curious about?"
                 />
-                <button className={TalkStyles.button} onClick={handleMsgSend}>
-                  <p className={TalkStyles.buttonText}>SEND</p>
-                </button>
+                <PrimaryButton
+                  onClickFunction={handleMsgSend}
+                  buttonText={"SEND"}
+                />
               </div>
-            )}
-          </>
-        </>
-      ) : (
-        <TalkSlideShow slides={talk.slides} />
-      )}
+            </a>
+          </Link>
+        ) : (
+          <div className={TalkCSS.msgBox}>
+            <textarea
+              className={TalkCSS.textInput}
+              onChange={(event) => setInputText(event.target.value)}
+              value={inputText}
+              placeholder="What are you curious about?"
+            />
+            <PrimaryButton
+              onClickFunction={handleMsgSend}
+              buttonText={"SEND"}
+            />
+          </div>
+        )}
+      </>
     </div>
   );
 }

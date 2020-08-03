@@ -1,15 +1,17 @@
 import React from "react";
-import Loader from "react-loader-spinner";
-import QuestionStyles from "../../../styles/isImgQuestion.module.css";
+import SpinLoader from "../atoms/SpinLoader";
+
+// CSS IMPORTS
+import ContainersCSS from "../../../styles/containers.module.css";
+
 export default function PreviewBox({
-  divStyles,
-  pStyles,
   slideText,
   slides,
   slideIndex,
   slideImg,
   isUploadFileLoading,
   isImg,
+  isLoading,
 }) {
   React.useEffect(() => {
     if (slideImg !== "") slides[slideIndex].slideImg = slideImg;
@@ -18,9 +20,32 @@ export default function PreviewBox({
 
   if (slides[slideIndex].slideText || slides[slideIndex].slideImg)
     return (
-      <div className={divStyles}>
+      <div
+        className={ContainersCSS.FlexColCenteredContainer}
+        style={{
+          backgroundColor: "#009900",
+          width: "80vw",
+          minHeight: "80vh",
+          borderRadius: "1rem",
+          margin: "3rem",
+          padding: "1rem",
+          color: "#fff",
+          maxWidth: "100rem",
+        }}
+      >
         {!slides[slideIndex].isImg && !slides[slideIndex].slideImg ? (
-          <p className={pStyles}>
+          <p
+            style={{
+              color: "#fff",
+              padding: "1rem",
+              fontSize: "3rem",
+              lineHeight: "1.5",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
             {slides[slideIndex] &&
             slides[slideIndex].slideText &&
             slideText === ""
@@ -29,29 +54,50 @@ export default function PreviewBox({
           </p>
         ) : (
           <img
-            className={QuestionStyles.img}
+            style={{
+              width: "80vw",
+              padding: "1rem",
+            }}
             src={
-              slides[slideIndex] && slides[slideIndex].slideImg ? (
-                slides[slideIndex].slideImg
-              ) : (
-                <div />
-              )
+              slides[slideIndex] &&
+              slides[slideIndex].slideImg &&
+              slideImg === ""
+                ? slides[slideIndex].slideImg
+                : slideImg
             }
           />
         )}
       </div>
     );
-
-  if (isUploadFileLoading)
-    return (
-      <div className={divStyles}>
-        <Loader type="TailSpin" color="#fff" height={100} width={100} />
-      </div>
-    );
+  if (isLoading || isUploadFileLoading) return <SpinLoader />;
   return (
-    <div className={divStyles}>
+    <div
+      // className={SlideShowCSS.container}
+      className={ContainersCSS.FlexColCenteredContainer}
+      style={{
+        backgroundColor: "#009900",
+        width: "80vw",
+        minHeight: "80vh",
+        borderRadius: "1rem",
+        margin: "3rem",
+        padding: "1rem",
+        color: "#fff",
+        maxWidth: "100rem",
+      }}
+    >
       {!slideImg ? (
-        <p className={pStyles}>
+        <p
+          style={{
+            color: "#fff",
+            padding: "1rem",
+            fontSize: "3rem",
+            lineHeight: "1.5",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
           {slideText.length == 0 &&
           slides[slideIndex] &&
           slides[slideIndex].slideText
@@ -59,7 +105,15 @@ export default function PreviewBox({
             : slideText}
         </p>
       ) : (
-        <img className={QuestionStyles.img} src={slideImg} />
+        <img
+          src={slideImg}
+          style={{
+            width: "80vw",
+            padding: "1rem",
+            // top: "50%",
+            // left: "50%",
+          }}
+        />
       )}
     </div>
   );

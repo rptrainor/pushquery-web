@@ -16,7 +16,7 @@ export default function Layout({ children }) {
   const { loadingUser, user, isBlocked } = useUser();
   if (loadingUser) return <p></p>;
   return (
-    <div>
+    <div className={LayoutStyles.outerContainer}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <title>Pushquery | Where SciComm Happens</title>
@@ -46,14 +46,14 @@ export default function Layout({ children }) {
             gtag('config', 'G-W4QYGFBM71');`,
           }}
         />
-        {/* <script
+        <script
           dangerouslySetInnerHTML={{
             __html: `
             window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=document.createElement("script");r.type="text/javascript",r.async=!0,r.src="https://cdn.heapanalytics.com/js/heap-"+e+".js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(r,a);for(var n=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],o=0;o<p.length;o++)heap[p[o]]=n(p[o])};
             heap.load("1915289989");
                 `,
           }}
-        /> */}
+        />
       </Head>
       <header>
         <div className={LayoutStyles.headerContainer}>
@@ -150,35 +150,6 @@ export default function Layout({ children }) {
         </div>
       </header>
       <main>{children}</main>
-      {/* <footer className={LayoutStyles.footerContainer}>
-        <div className={LayoutStyles.colItem}>
-          <a href="https://twitter.com/pushquery">
-            <p>Follow Pushquery</p>
-            <img
-              src="/Twitter_Logo_Blue.svg"
-              alt="Twitter logo"
-              className={LayoutStyles.twitterLogo}
-            />
-          </a>
-        </div>
-        <div>
-          <p>Download the mobile App</p>
-          <a href="https://apps.apple.com/us/app/pushquery-app/id1515332528">
-            <img
-              src="/appStoreDL.svg"
-              alt="Download on the Apple App Store"
-              className={LayoutStyles.appStoreDL}
-            />
-          </a>
-          <a href="https://play.google.com/store/apps/details?id=pushquery.app">
-            <img
-              src="/GooglePlayStoreBadge.svg"
-              alt="Get in on the Google Play Store"
-              className={LayoutStyles.appStoreDL}
-            />
-          </a>
-        </div>
-      </footer> */}
     </div>
   );
 }

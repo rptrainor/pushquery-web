@@ -1,7 +1,6 @@
 import React from "react";
 import firebase from "../../../firebase/clientApp";
-import TalkSlideShow from "../molecules/TalkSlideShow";
-import TalkCover2 from "./TalkCover2";
+import TalkCover from "./TalkCover";
 
 export default function Home() {
   const [talks, setTalks] = React.useState([]);
@@ -79,9 +78,10 @@ export default function Home() {
     <div>
       {talks[currentTalkIndex] && talks[currentTalkIndex].slides ? (
         <>
-          <TalkCover2
+          <TalkCover
             slides={talks[currentTalkIndex].slides}
             id={talks[currentTalkIndex].id}
+            user={talks[currentTalkIndex].user}
           />
         </>
       ) : (

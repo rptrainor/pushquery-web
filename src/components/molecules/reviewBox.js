@@ -1,29 +1,51 @@
 import React from "react";
-import QuestionStyles from "../../../styles/isImgQuestion.module.css";
+import ContainersCSS from "../../../styles/containers.module.css";
 
-export default function ReviewBox({
-  divStyles,
-  pStyles,
-  slideText,
-  slides,
-  slideIndex,
-}) {
+export default function ReviewBox({ slides, reviewSlideIndex }) {
   return (
-    <div className={divStyles}>
-      {!slides[slideIndex].isImg ? (
-        <p className={pStyles}>
-          {slides[slideIndex] && slides[slideIndex].slideText ? (
-            slides[slideIndex].slideText
+    <div
+      className={ContainersCSS.FlexColCenteredContainer}
+      style={{
+        backgroundColor: "#009900",
+        width: "80vw",
+        minHeight: "80vh",
+        borderRadius: "1rem",
+        margin: "3rem",
+        padding: "1rem",
+        color: "#fff",
+        maxWidth: "100rem",
+      }}
+    >
+      {!slides[reviewSlideIndex].isImg ? (
+        <p
+          style={{
+            color: "#fff",
+            padding: "1rem",
+            fontSize: "3rem",
+            lineHeight: "1.5",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          {slides[reviewSlideIndex] && slides[reviewSlideIndex].slideText ? (
+            slides[reviewSlideIndex].slideText
           ) : (
             <div />
           )}
         </p>
       ) : (
         <img
-          className={QuestionStyles.img}
+          style={{
+            width: "80vw",
+            padding: "1rem",
+            // top: "50%",
+            // left: "50%",
+          }}
           src={
-            slides[slideIndex] && slides[slideIndex].slideImg ? (
-              slides[slideIndex].slideImg
+            slides[reviewSlideIndex] && slides[reviewSlideIndex].slideImg ? (
+              slides[reviewSlideIndex].slideImg
             ) : (
               <div />
             )

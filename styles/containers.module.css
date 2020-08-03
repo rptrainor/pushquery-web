@@ -1,0 +1,87 @@
+.FlexColStartOnTopContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+.FlexColCenteredContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.FlexColStartOnTop66WideContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 66%;
+  margin-top: 3rem;
+  margin: 3rem 1rem 8rem 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.FlexibleCreateWithMobileAndDesktopContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 66%;
+  margin-top: 3rem;
+  margin: 3rem 1rem 8rem 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.FlexColStartOnTop90WideWhiteBackgroundContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
+  margin-top: 3rem;
+  background-color: #fff;
+  margin: 3rem 1rem 8rem 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 0.1rem solid #bab6ad;
+}
+.questionBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.pureCenteredBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 0px) and (max-width: 567px) {
+  .FlexColStartOnTop66WideContainer {
+    width: 90%;
+  }
+
+}
+
+@media (min-width: 568px) and (max-width: 767px) {
+  .FlexColStartOnTop66WideContainer {
+    width: 90%;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+@media (min-width: 1024px) and (max-width: 1365px) {
+
+}
+@media (min-width: 1366px) {
+
+}

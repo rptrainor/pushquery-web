@@ -1,37 +1,27 @@
 import React from "react";
+import PrimaryButton from "../atoms/PrimaryButton";
+// CSS IMPORTS
+import ContainersCSS from "../../../styles/containers.module.css";
 
 export default function CreateTextSlide({
-  CreateStyles,
   createHeaderArray,
   slideIndex,
   slideText,
-  PrimaryBtn,
   addSlide,
-  setSlideText
+  setSlideText,
 }) {
   return (
-    <div className={CreateStyles.inputBox}>
-      <h1 className={CreateStyles.header}>
-        {createHeaderArray[slideIndex].createHeader}
-      </h1>
-
-      <label className={CreateStyles.label} htmlFor="description">
-        280 character limit
-      </label>
+    <div className={ContainersCSS.FlexColStartOnTop66WideContainer}>
+      <h1>{createHeaderArray[slideIndex].createHeader}</h1>
+      <label>280 character limit</label>
       <textarea
-        className={CreateStyles.textInput}
         name="text"
         value={slideText}
         rows="8"
         maxLength="280"
         onChange={(event) => setSlideText(event.target.value)}
       />
-      <PrimaryBtn
-        onClickFunction={addSlide}
-        btnStyles={CreateStyles.button}
-        textStyles={CreateStyles.buttonText}
-        BTN_TEXT={"SAVE"}
-      />
+      <PrimaryButton onClickFunction={addSlide} buttonText={"SAVE"} />
     </div>
   );
 }

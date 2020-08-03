@@ -1,13 +1,17 @@
 import React from "react";
-import Loader from "react-loader-spinner";
-import CreateStyles from "../../../styles/createComponent.module.css";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+
+//  COMPONENT IMPORTS
+import PrimaryButton from "../atoms/PrimaryButton";
+import SecondaryButton from "../atoms/SecondaryButton";
+import SpinLoader from "../atoms/SpinLoader";
 import ReviewBox from "./reviewBox";
+// CSS IMPORTS
+import ContainersCSS from "../../../styles/containers.module.css";
+import SlideShowCSS from "../../../styles/slideShow.module.css";
 
 export default function ReviewCompletedSlide({
   slideText,
-  divStyles,
-  pStyles,
   slides,
   slideImg,
   setSlideIndex,
@@ -15,6 +19,8 @@ export default function ReviewCompletedSlide({
   setIsImg,
   isUploadFileLoading,
   createTalk,
+  isLoading,
+  setIsLoading
 }) {
   const [reviewSlideIndex, setReviewSlideIndex] = React.useState(0);
 
@@ -27,6 +33,7 @@ export default function ReviewCompletedSlide({
   };
 
   const editSlide = () => {
+    setIsLoading(true);
     setSlideIndex(reviewSlideIndex);
     setIsQuestionAnswered(true);
     if (!slides[reviewSlideIndex].isImg) {
@@ -34,28 +41,39 @@ export default function ReviewCompletedSlide({
     } else {
       setIsImg(true);
     }
+    setIsLoading(false);
   };
 
-  if (isUploadFileLoading)
-    return (
-      <div className={CreateStyles.reviewContainer}>
-        <div className={CreateStyles.reviewBox}>
-          <Loader type="TailSpin" color="#fff" height={100} width={100} />
-        </div>
-      </div>
-    );
+  if (isUploadFileLoading || isLoading) return <SpinLoader />;
   return (
-    <div className={CreateStyles.reviewContainer}>
-      <div className={CreateStyles.reviewBox}>
+    <div
+      className={ContainersCSS.FlexColCenteredContainer}
+      style={{ marginTop: "3rem", marginBottom: "8rem" }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "nowrap",
+          justifyContent: "space-around",
+          width: "100%",
+        }}
+      >
         {reviewSlideIndex !== 0 ? (
-          <button onClick={backOneSlide} className={CreateStyles.reviewBtn}>
+          <button
+            onClick={backOneSlide}
+            style={{ backgroundColor: "transparent", border: 0 }}
+          >
             <LeftOutlined style={{ fontSize: "3rem", color: "#333" }} />
           </button>
         ) : (
           <div />
         )}
         {reviewSlideIndex !== 4 ? (
-          <button onClick={forwardOneSlide} className={CreateStyles.reviewBtn}>
+          <button
+            onClick={forwardOneSlide}
+            style={{ backgroundColor: "transparent", border: 0 }}
+          >
             <RightOutlined style={{ fontSize: "3rem", color: "#333" }} />
           </button>
         ) : (
@@ -63,19 +81,18 @@ export default function ReviewCompletedSlide({
         )}
       </div>
       <ReviewBox
-        divStyles={divStyles}
-        pStyles={pStyles}
+        slides={slides}
+        reviewSlideIndex={reviewSlideIndex}
         slideText={slideText}
         slides={slides}
         slideIndex={reviewSlideIndex}
         slideImg={slideImg}
       />
-      <button onClick={editSlide} className={CreateStyles.buttonSecondary}>
-        <p className={CreateStyles.buttonTextSecondary}>EDIT THIS SLIDE</p>
-      </button>
-      <button onClick={createTalk} className={CreateStyles.button}>
-        <p className={CreateStyles.buttonText}>PUBLISH TALK</p>
-      </button>
+      <SecondaryButton
+        onClickFunction={editSlide}
+        buttonText={"EDIT THIS SLIDE"}
+      />
+      <PrimaryButton onClickFunction={createTalk} buttonText={"PUBLISH TALK"} />
     </div>
   );
 }

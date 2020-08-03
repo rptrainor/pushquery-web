@@ -3,14 +3,18 @@ import { useRouter } from "next/router";
 // import { Machine } from "xstate";
 import firebase from "../../../firebase/clientApp";
 import { useUser } from "../../../context/userContext";
-import CreateStyles from "../../../styles/createComponent.module.css";
-import PrimaryBtn from "../molecules/primaryBtn";
-import SecondaryBtn from "../molecules/secondaryBtn";
-import PreviewBox from "../molecules/previewBox";
-import IsImgQuestion from "../molecules/isImgQuestion";
-import CreateTextSlide from "../molecules/createTextSlide";
-import CreateImgSlide from "../molecules/createImgSlide";
-import ReviewCompletedSlide from "../molecules/reviewCompletedSlide";
+
+//  COMPONENT IMPORTS
+import PrimaryButton from "../atoms/PrimaryButton";
+import SecondaryButton from "../atoms/SecondaryButton";
+import SpinLoader from "../atoms/SpinLoader";
+import ReviewCompletedSlide from "../molecules/ReviewCompletedSlide";
+import IsImgQuestion from "../molecules/IsImgQuestion";
+import CreateTextSlide from "../molecules/CreateTextSlide";
+import CreateImgSlide from "../molecules/CreateImgSlide";
+import PreviewBox from "../molecules/PreviewBox";
+// CSS IMPORTS
+import ContainersCSS from "../../../styles/containers.module.css";
 
 export default function CreateComponent() {
   const [slides, setSlides] = React.useState([{}, {}, {}, {}, {}]);
@@ -21,6 +25,7 @@ export default function CreateComponent() {
   const [isQuestionAnswered, setIsQuestionAnswered] = React.useState(false);
   const [isUploadFileLoading, setIsUploadFileLoading] = React.useState(false);
   const { loadingUser, user, isBlocked } = useUser();
+  const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -28,6 +33,7 @@ export default function CreateComponent() {
   }, [user]);
 
   const createTalk = () => {
+    setIsLoading(true);
     const db = firebase.firestore();
     if (!isBlocked) {
       db.collection("talks")
@@ -50,9 +56,11 @@ export default function CreateComponent() {
             id: docRef.id,
           });
           setSlides([{}, {}, {}, {}, {}]);
+          setIsLoading(false);
           router.push(`/talk/${docRef.id}`);
         });
     } else {
+      setIsLoading(false);
       alert(
         "We are sorry, one of your posts has been flagged by our community. We are in the process of reviewing this flag, but until then you will not be allowed to host a Talk.  We appreciate your patience and will email you with more details about this review shortly. Thank you"
       );
@@ -60,21 +68,27 @@ export default function CreateComponent() {
   };
 
   const addSlide = () => {
+    setIsLoading(true);
     if (!isImg && slideText.length !== 0) {
       slides[slideIndex].slideText = slideText;
       slides[slideIndex].isImg = false;
+      setIsLoading(false);
     }
     if (isImg && slideImg.length !== 0) {
       slides[slideIndex].slideImg = slideImg;
       slides[slideIndex].isImg = true;
+      setIsLoading(false);
     }
     if (slideIndex !== 4 && !slides[slideIndex + 1].isImg) {
       setIsImg(false);
+      setIsLoading(false);
     }
     if (slideIndex !== 4 && slides[slideIndex + 1].isImg) {
       setIsImg(true);
+      setIsLoading(false);
     }
     setIsQuestionAnswered(false);
+    setIsLoading(false);
     setSlideIndex(slideIndex + 1);
     setSlideText("");
     setSlideImg("");
@@ -82,7 +96,7 @@ export default function CreateComponent() {
 
   async function uploadFile(event) {
     event.preventDefault();
-    setIsUploadFileLoading(true);
+    setIsLoading(true);
     console.log("uploading file...");
     const files = event.target.files;
     const data = new FormData();
@@ -99,7 +113,7 @@ export default function CreateComponent() {
     const file = await res.json();
     console.log(file);
     setSlideImg(file.secure_url);
-    setIsUploadFileLoading(false);
+    setIsLoading(false);
   }
 
   console.log({
@@ -109,6 +123,7 @@ export default function CreateComponent() {
     slideImg,
     isImg,
     isQuestionAnswered,
+    isLoading
   });
 
   const createHeaderArray = [
@@ -130,6 +145,7 @@ export default function CreateComponent() {
     },
   ];
 
+  if (isLoading || loadingUser) return <SpinLoader />;
   if (
     !isQuestionAnswered &&
     slideIndex !== 5 &&
@@ -140,57 +156,52 @@ export default function CreateComponent() {
       <IsImgQuestion
         setIsImg={setIsImg}
         setIsQuestionAnswered={setIsQuestionAnswered}
+        PrimaryButton={PrimaryButton}
+        ContainersCSS={ContainersCSS}
       />
     );
   if (slideIndex == 5)
     return (
       <ReviewCompletedSlide
-        setSlideIndex={setSlideIndex}
-        divStyles={CreateStyles.previewBox}
-        pStyles={CreateStyles.textFont}
-        slideText={slideText}
         slides={slides}
-        slideImg={slideImg}
-        setSlideIndex={setSlideIndex}
         setIsQuestionAnswered={setIsQuestionAnswered}
         setIsImg={setIsImg}
         isUploadFileLoading={isUploadFileLoading}
         createTalk={createTalk}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        setSlideIndex={setSlideIndex}
       />
     );
   return (
-    <div className={CreateStyles.container}>
+    <div className={ContainersCSS.FlexColStartOnTop66WideContainer}>
       {!isImg ||
       (slides[slideIndex].slideText && !slides[slideIndex].slideImg) ? (
         <CreateTextSlide
-          CreateStyles={CreateStyles}
           createHeaderArray={createHeaderArray}
           slideIndex={slideIndex}
           slideText={slideText}
-          PrimaryBtn={PrimaryBtn}
           addSlide={addSlide}
           setSlideText={setSlideText}
         />
       ) : (
         <CreateImgSlide
-          CreateStyles={CreateStyles}
           createHeaderArray={createHeaderArray}
           slideIndex={slideIndex}
-          SecondaryBtn={SecondaryBtn}
           addSlide={addSlide}
           uploadFile={uploadFile}
           isUploadFileLoading={isUploadFileLoading}
         />
       )}
+
       <PreviewBox
-        divStyles={CreateStyles.previewBox}
-        pStyles={CreateStyles.textFont}
         slideText={slideText}
         slides={slides}
         slideIndex={slideIndex}
         slideImg={slideImg}
         isUploadFileLoading={isUploadFileLoading}
         isImg={isImg}
+        isLoading={isLoading}
       />
     </div>
   );
