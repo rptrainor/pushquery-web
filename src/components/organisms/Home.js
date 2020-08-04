@@ -39,6 +39,10 @@ export default function Home() {
   };
 
   const NextTalk = async () => {
+    // if (!talks[currentTalkIndex]) {
+    //   setCurrentTalkIndex(0);
+    //   console.log("RESET INDEX");
+    // }
     if (lastDoc) {
       setIsMoreLoading(true);
 
@@ -60,9 +64,12 @@ export default function Home() {
 
           setTalks(newTalks);
           setCurrentTalkIndex(currentTalkIndex + 1);
-          // if (snapshot.docs.length < 1) setLastDoc(null);
+          if (snapshot.docs.length < 1) setLastDoc(null);
         } else {
-          setLastDoc(null);
+          setCurrentTalkIndex(0);
+          setTalks([]);
+          getTalks()
+          // setLastDoc(null);
         }
 
         setIsMoreLoading(false);
@@ -70,8 +77,13 @@ export default function Home() {
     }
   };
 
-  console.log(talks[currentTalkIndex]);
-  console.log(currentTalkIndex);
+  // console.log(talks[currentTalkIndex]);
+  // console.log(talks);
+  // console.log(currentTalkIndex);
+  console.log({
+    talks,
+    currentTalkIndex,
+  });
 
   if (loading || isMoreLoading) return "";
   return (
