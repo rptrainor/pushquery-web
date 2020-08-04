@@ -47,6 +47,31 @@
   font-family: "Lato", sans-serif;
   cursor: pointer;
 }
+.tertiaryButton {
+  background-color: #ffffff;
+  padding: 0.5rem;
+  height: 5rem;
+  cursor: pointer;
+  border: 0.25rem solid #009900;
+  border-radius: 1rem;
+  position: absolute;
+  top: 7rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+.tertiaryButtonText {
+  color: #009900 !important;
+  background-color: #ffffff;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  font-family: "Lato", sans-serif;
+  cursor: pointer;
+}
 .file {
   display: flex;
   flex-direction: column;

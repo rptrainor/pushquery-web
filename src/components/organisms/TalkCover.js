@@ -11,6 +11,7 @@ import SpinLoader from "../atoms/SpinLoader";
 // CSS IMPORTS
 import ContainersCSS from "../../../styles/containers.module.css";
 import SlideShowCSS from "../../../styles/slideShow.module.css";
+import ButtonsCSS from "../../../styles/buttons.module.css";
 import TalkIconBox from "../molecules/TalkIconBox";
 
 export const slideMachine = Machine({
@@ -96,9 +97,17 @@ export const slideMachine = Machine({
   },
 });
 
-export default function TalkCover({ id, slides, user }) {
+export default function TalkCover({ id, slides, user, NextTalk }) {
   const [state, send] = useMachine(slideMachine);
   const [displayingNextBtn, setDisplayingNextBtn] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(ShowNextButton, 15000);
+    function ShowNextButton() {
+      setDisplayingNextBtn(true);
+      console.log("DISPLAYED");
+    }
+  }, [slides]);
 
   console.log(state.value);
   console.log(Object.keys(state.value)[0]);
@@ -106,9 +115,17 @@ export default function TalkCover({ id, slides, user }) {
   return (
     <div className={ContainersCSS.FlexColStartOnTopContainer}>
       {/* BELOW IS THE BUTTON WHAT WILL RENDER OVER THE FULL SCREEN WHEN "PAUSE" IS SENT TO THE MACHINE */}
-      <button className={SlideShowCSS.button} onClick={() => send("PAUSE")}>
-        <div className={SlideShowCSS.container}>
-          {/* CHECKING IF WE NEED TO REDENDER THE PAUSE BUTTON */}
+      <div className={SlideShowCSS.container}>
+        {/* CHECKING IF WE NEED TO REDENDER THE PAUSE BUTTON */}
+        <TalkIconBox id={id} send={send} user={user} />
+        {displayingNextBtn ? (
+          <button className={ButtonsCSS.tertiaryButton} onClick={NextTalk}>
+            <p className={ButtonsCSS.tertiaryButtonText}>NEXT</p>
+          </button>
+        ) : (
+          <div />
+        )}
+        <button className={SlideShowCSS.button} onClick={() => send("PAUSE")}>
           {Object.keys(state.value)[0] == "pause" ? (
             <PlayCircleOutlined
               style={{ fontSize: "10rem", color: "rgba(251, 251, 251, 0.4)" }}
@@ -117,18 +134,19 @@ export default function TalkCover({ id, slides, user }) {
           ) : (
             <div />
           )}
-          <TalkIconBox id={id} send={send} user={user} />
           {/* TERNARY STATMENT TO CHECK IF THE SLIDE IS IMG OR TEXT */}
-          {slides && slides[state.value.view || state.value.pause].isImg ? (
-            <img
-              src={slides[state.value.view || state.value.pause].slideImg}
-              className={SlideShowCSS.img}
-            />
-          ) : (
-            <p>{slides[state.value.view || state.value.pause].slideText}</p>
-          )}
-        </div>
-      </button>
+          <div style={{ height: "100%", width: "100%" }}>
+            {slides && slides[state.value.view || state.value.pause].isImg ? (
+              <img
+                src={slides[state.value.view || state.value.pause].slideImg}
+                className={SlideShowCSS.img}
+              />
+            ) : (
+              <p>{slides[state.value.view || state.value.pause].slideText}</p>
+            )}
+          </div>
+        </button>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,6 @@ import ContainersCSS from "../../../styles/containers.module.css";
 import ButtonsCSS from "../../../styles/buttons.module.css";
 
 export default function CreateImgSlide({
-  CreateStyles,
   createHeaderArray,
   slideIndex,
   addSlide,

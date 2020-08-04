@@ -82,6 +82,7 @@ export default function Home() {
             slides={talks[currentTalkIndex].slides}
             id={talks[currentTalkIndex].id}
             user={talks[currentTalkIndex].user}
+            NextTalk={NextTalk}
           />
         </>
       ) : (

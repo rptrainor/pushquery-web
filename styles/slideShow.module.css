@@ -2,7 +2,7 @@
   background-color: #009900;
   min-width: 100vw;
   max-width: 100vw;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: row;
 }
@@ -33,7 +33,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 100vw;
 }
 .pauseIcon {
@@ -41,9 +42,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   z-index: 5;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 }
 .iconBox {
   display: flex;
@@ -85,9 +90,9 @@
   .iconBox {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin: 1rem;
-    top: 0;
+    height: 50vh;
   }
 }
 
@@ -96,7 +101,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin: 1rem;
+    margin: 2rem;
     height: 50vh;
   }
 }
@@ -104,8 +109,8 @@
   .iconBox {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    margin: 1rem;
-    top: 0;
+    justify-content: space-evenly;
+    margin: 2rem;
+    height: 50vh;
   }
 }
