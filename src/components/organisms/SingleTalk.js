@@ -8,6 +8,7 @@ import firebase from "../../../firebase/clientApp";
 import SpinLoader from "../atoms/SpinLoader";
 import TertiaryButton from "../atoms/TertiaryButton";
 import TalkCover from "./TalkCover";
+import ReviewIconBox from "../molecules/ReviewIconBox";
 
 // Style imports
 import ContainersCSS from "../../../styles/containers.module.css";
@@ -133,10 +134,10 @@ export default function SingleTalk({ id }) {
   console.log(messages);
   return (
     <div className={ContainersCSS.SingleTalkContainer}>
-      {/* <TertiaryButton
-        onClickFunction={toggleShowSlideShow}
-        buttonText={`SEE ${showSlideShow ? "CONVERSATION" : "SLIDES"}`}
-      /> */}
+      <ReviewIconBox
+        showSlideShow={showSlideShow}
+        toggleShowSlideShow={toggleShowSlideShow}
+      />
       <div className={TalkCSS.msgList}>
         {/* WE NEED TO DO SINGLE COMMENT ONCE WE HAVE USE LOGIN BUILT */}
         {messages ? (

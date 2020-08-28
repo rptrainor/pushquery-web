@@ -60,28 +60,8 @@ export default function ProfileComponent() {
     });
   }
 
-  //   React.useEffect(() => {
-  //     async function updateProfile() {
-  //       await firebase
-  //         .firestore()
-  //         .collection("users")
-  //         .doc(firebase.auth().currentUser.uid)
-  //         .update({
-  //           photoURL: avatar,
-  //         })
-  //         .then(console.log("updating firestore"));
-  //       await setUser({
-  //         displayName: displayName,
-  //         photoURL: avatar,
-  //       });
-  //     }
-
-  //     observer();
-  //     updateProfile();
-  //   }, [avatar, value]);
-
   function SignOut() {
-    router.push("/")
+    router.push("/");
     firebase.auth().signOut();
   }
 
@@ -122,9 +102,8 @@ export default function ProfileComponent() {
         />
       </label>
       <PrimaryButton onClickFunction={updateProfile} buttonText={"SAVE"} />
-      <div style={{ position: "absolute", bottom: "6rem" }}>
-        <SecondaryButton onClickFunction={SignOut} buttonText={"SIGN OUT"} />
-      </div>
+      <div style={{ height: "3rem" }} />
+      <SecondaryButton onClickFunction={SignOut} buttonText={"SIGN OUT"} />
     </div>
   );
 }

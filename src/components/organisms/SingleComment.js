@@ -24,7 +24,7 @@ export default function SingleComment({ user, message }) {
         }
         style={{ width: "auto" }}
       >
-        <div className={TalkCSS.commentDetailsBox}>
+        <>
           <img
             src={message.user.photoURL}
             className={
@@ -33,12 +33,12 @@ export default function SingleComment({ user, message }) {
                 : TalkCSS.avatarLeft
             }
           />
-        </div>
-        <div className={TalkCSS.commentDetailsBox}>
-          <p className={TalkCSS.displayName}>{message.user.displayName}</p>
-          <p className={TalkCSS.time}>{howLongAgo} ago</p>
-        </div>
-        <p>{message.text}</p>
+          <div className={TalkCSS.commentDetailsBox}>
+            <p className={TalkCSS.displayName}>{message.user.displayName}</p>
+            <p className={TalkCSS.time}>{howLongAgo} ago</p>
+            <p>{message.text}</p>
+          </div>
+        </>
       </div>
     </div>
   );

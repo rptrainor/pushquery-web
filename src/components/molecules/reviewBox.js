@@ -7,13 +7,9 @@ export default function ReviewBox({ slides, reviewSlideIndex }) {
       className={ContainersCSS.FlexColCenteredContainer}
       style={{
         backgroundColor: "#6BC88F",
-        // width: "80vw",
-        minHeight: "80vh",
-        borderRadius: "1rem",
-        margin: "3rem",
-        // padding: "1rem",
+        width: "100vw",
+        height: "100vh",
         color: "#fff",
-        maxWidth: "100rem",
       }}
     >
       {!slides[reviewSlideIndex].isImg ? (

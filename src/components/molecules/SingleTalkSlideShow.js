@@ -3,6 +3,7 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 // COMPONENT IMPORTS
 import TertiaryButton from "../atoms/TertiaryButton";
+import ReviewIconBox from "./ReviewIconBox";
 import ReviewBox from "./ReviewBox";
 // CSS IMPORTS
 import ContainersCSS from "../../../styles/containers.module.css";
@@ -22,46 +23,18 @@ export default function SingleTalkSlideShow({
     setReviewSlideIndex(reviewSlideIndex + 1);
   };
 
+  console.log({ reviewSlideIndex });
   return (
-    <>
-      <div
-        className={ContainersCSS.FlexColCenteredContainer}
-        style={{ marginTop: "3rem", marginBottom: "8rem" }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "nowrap",
-            justifyContent: "space-around",
-            width: "100%",
-            marginTop: "5rem"
-          }}
-        >
-          {reviewSlideIndex !== 0 ? (
-            <button
-              onClick={backOneSlide}
-              style={{ backgroundColor: "transparent", border: 0 }}
-            >
-              <LeftOutlined style={{ fontSize: "3rem", color: "#333" }} />
-            </button>
-          ) : (
-            <div />
-          )}
-          {reviewSlideIndex !== 4 ? (
-            <button
-              onClick={forwardOneSlide}
-              style={{ backgroundColor: "transparent", border: 0 }}
-            >
-              <RightOutlined style={{ fontSize: "3rem", color: "#333" }} />
-            </button>
-          ) : (
-            <div />
-          )}
-        </div>
-        <TertiaryButton
-          onClickFunction={toggleShowSlideShow}
-          buttonText={`SEE ${showSlideShow ? "CONVERSATION" : "SLIDES"}`}
+      <div style={{
+        backgroundColor: "#6bc88f",
+        width: "100vw"
+      }}>
+        <ReviewIconBox
+          toggleShowSlideShow={toggleShowSlideShow}
+          showSlideShow={showSlideShow}
+          reviewSlideIndex={reviewSlideIndex}
+          backOneSlide={backOneSlide}
+          forwardOneSlide={forwardOneSlide}
         />
         <ReviewBox
           slides={slides}
@@ -71,6 +44,5 @@ export default function SingleTalkSlideShow({
           // slideImg={slideImg}
         />
       </div>
-    </>
   );
 }
