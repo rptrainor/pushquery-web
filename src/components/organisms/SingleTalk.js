@@ -6,17 +6,22 @@ import firebase from "../../../firebase/clientApp";
 
 // Component imports
 import SpinLoader from "../atoms/SpinLoader";
+import TertiaryButton from "../atoms/TertiaryButton";
+import TalkCover from "./TalkCover";
 
 // Style imports
 import ContainersCSS from "../../../styles/containers.module.css";
 import TalkCSS from "../../../styles/talk.module.css";
 import SingleComment from "./SingleComment";
 import PrimaryButton from "../atoms/PrimaryButton";
+import ReviewBox from "../molecules/ReviewBox";
+import SingleTalkSlideShow from "../molecules/SingleTalkSlideShow";
 
 export default function SingleTalk({ id }) {
   const [messages, setMessages] = React.useState([]);
   const [talk, setTalk] = React.useState({});
   const [inputText, setInputText] = React.useState("");
+  const [showSlideShow, setShowSlideShow] = React.useState(false);
   const { loadingUser, user, isBlocked } = useUser();
   const router = useRouter();
 
@@ -113,23 +118,43 @@ export default function SingleTalk({ id }) {
     router.push("/");
   };
 
-  console.log({ user, isBlocked, talk });
-
+  const toggleShowSlideShow = () => setShowSlideShow(!showSlideShow);
+  console.log(talk);
   // WAITING FOR MESSAGE AND USER TO LOAD
   if (!messages || loadingUser) return <SpinLoader />;
+  if (showSlideShow)
+    return (
+      <SingleTalkSlideShow
+        slides={talk.slides}
+        showSlideShow={showSlideShow}
+        toggleShowSlideShow={toggleShowSlideShow}
+      />
+    );
+  console.log(messages);
   return (
     <div className={ContainersCSS.FlexColStartOnTopContainer}>
+      <TertiaryButton
+        onClickFunction={toggleShowSlideShow}
+        buttonText={`SEE ${showSlideShow ? "CONVERSATION" : "SLIDES"}`}
+      />
       <div className={TalkCSS.msgList}>
         {/* WE NEED TO DO SINGLE COMMENT ONCE WE HAVE USE LOGIN BUILT */}
         {messages ? (
           messages.map((message) => (
-            <SingleComment message={message} key={message._id} />
+            <SingleComment message={message} key={message._id} user={user} />
           ))
         ) : (
           <div />
         )}
+        {messages.length == 0 ? (
+          <h1 style={{ padding: "2rem" }}>
+            Post a comment below to get the conversation started!
+          </h1>
+        ) : (
+          <div />
+        )}
       </div>
-      <>
+      <div>
         {!user ? (
           <Link href="login">
             <a>
@@ -161,7 +186,7 @@ export default function SingleTalk({ id }) {
             />
           </div>
         )}
-      </>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import firebase from "../../../firebase/clientApp";
 import TalkCover from "./TalkCover";
+import SpinLoader from "../atoms/SpinLoader";
 
 export default function Home() {
   const [talks, setTalks] = React.useState([]);
@@ -9,7 +10,10 @@ export default function Home() {
   const [isMoreLoading, setIsMoreLoading] = React.useState(false);
   const [currentTalkIndex, setCurrentTalkIndex] = React.useState(0);
 
-  const talksRef = firebase.firestore().collection("talks");
+  const talksRef = firebase
+    .firestore()
+    .collection("talks")
+    .where("flag.flagged", "==", false);
 
   // pulling the talks from Firebase
   React.useEffect(() => {
@@ -68,7 +72,7 @@ export default function Home() {
         } else {
           setCurrentTalkIndex(0);
           setTalks([]);
-          getTalks()
+          getTalks();
           // setLastDoc(null);
         }
 
@@ -77,29 +81,22 @@ export default function Home() {
     }
   };
 
-  // console.log(talks[currentTalkIndex]);
-  // console.log(talks);
-  // console.log(currentTalkIndex);
-  console.log({
-    talks,
-    currentTalkIndex,
-  });
-
-  if (loading || isMoreLoading) return "";
+  if (loading || isMoreLoading) return <SpinLoader />;
   return (
-    <div>
-      {talks[currentTalkIndex] && talks[currentTalkIndex].slides ? (
-        <>
-          <TalkCover
-            slides={talks[currentTalkIndex].slides}
-            id={talks[currentTalkIndex].id}
-            user={talks[currentTalkIndex].user}
-            NextTalk={NextTalk}
-          />
-        </>
-      ) : (
-        <button onClick={NextTalk}>mas</button>
-      )}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <TalkCover
+        slides={talks[currentTalkIndex].slides}
+        id={talks[currentTalkIndex].id}
+        user={talks[currentTalkIndex].user}
+        NextTalk={NextTalk}
+      />
     </div>
   );
 }

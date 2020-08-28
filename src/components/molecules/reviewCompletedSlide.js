@@ -83,10 +83,9 @@ export default function ReviewCompletedSlide({
       <ReviewBox
         slides={slides}
         reviewSlideIndex={reviewSlideIndex}
-        slideText={slideText}
-        slides={slides}
-        slideIndex={reviewSlideIndex}
-        slideImg={slideImg}
+        // slideText={slideText}
+        // slideIndex={reviewSlideIndex}
+        // slideImg={slideImg}
       />
       <SecondaryButton
         onClickFunction={editSlide}

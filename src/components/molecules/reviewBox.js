@@ -6,12 +6,12 @@ export default function ReviewBox({ slides, reviewSlideIndex }) {
     <div
       className={ContainersCSS.FlexColCenteredContainer}
       style={{
-        backgroundColor: "#009900",
-        width: "80vw",
+        backgroundColor: "#6BC88F",
+        // width: "80vw",
         minHeight: "80vh",
         borderRadius: "1rem",
         margin: "3rem",
-        padding: "1rem",
+        // padding: "1rem",
         color: "#fff",
         maxWidth: "100rem",
       }}
@@ -38,8 +38,8 @@ export default function ReviewBox({ slides, reviewSlideIndex }) {
       ) : (
         <img
           style={{
-            width: "80vw",
-            padding: "1rem",
+            width: "100%",
+            // padding: "1rem",
             // top: "50%",
             // left: "50%",
           }}

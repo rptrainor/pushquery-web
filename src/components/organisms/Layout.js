@@ -62,7 +62,7 @@ export default function Layout({ children }) {
               {router.pathname == "/" ? (
                 <div className={LayoutStyles.headerIconBox}>
                   <HomeOutlined
-                    style={{ fontSize: "3rem", color: "#009900" }}
+                    style={{ fontSize: "3rem", color: "#6BC88F" }}
                   />
                   <p>Home</p>
                 </div>
@@ -79,7 +79,7 @@ export default function Layout({ children }) {
               {router.pathname == "/create" ? (
                 <div className={LayoutStyles.headerIconBox}>
                   <PlusCircleOutlined
-                    style={{ fontSize: "3rem", color: "#009900" }}
+                    style={{ fontSize: "3rem", color: "#6BC88F" }}
                   />
                   <p>Create</p>
                 </div>
@@ -98,7 +98,7 @@ export default function Layout({ children }) {
               {router.pathname == "/values" ? (
                 <div className={LayoutStyles.headerIconBox}>
                   <HeartOutlined
-                    style={{ fontSize: "3rem", color: "#009900" }}
+                    style={{ fontSize: "3rem", color: "#6BC88F" }}
                   />
                   <p>Values</p>
                 </div>
@@ -116,7 +116,7 @@ export default function Layout({ children }) {
                 {router.pathname == "/login" || router.pathname == "/signup" ? (
                   <div className={LayoutStyles.headerIconBox}>
                     <UserOutlined
-                      style={{ fontSize: "3rem", color: "#009900" }}
+                      style={{ fontSize: "3rem", color: "#6BC88F" }}
                     />
                     <p>Me</p>
                   </div>
@@ -134,7 +134,7 @@ export default function Layout({ children }) {
                 {router.pathname == "/login" || router.pathname == "/signup" ? (
                   <div className={LayoutStyles.headerIconBox}>
                     <UserOutlined
-                      style={{ fontSize: "3rem", color: "#009900" }}
+                      style={{ fontSize: "3rem", color: "#6BC88F" }}
                     />
                     <p>Me</p>
                   </div>

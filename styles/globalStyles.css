@@ -6,7 +6,7 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
-  background-color: #FEF7E6;
+  background-color: #FFEFD5;
 }
 *,
 *:before,
@@ -18,14 +18,14 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #FEF7E6;
+  background-color: #FFEFD5;
   max-width: 1000px;
   margin: 0 auto;
 }
 header {
   background-color: #fff;
   width: 100vw;
-  border-bottom: 0.1rem solid #bab6ad;
+  border-bottom: 0.1rem solid #C5BFAF;
 }
 body {
   font-size: 1rem;
@@ -44,7 +44,7 @@ img {
 }
 a {
   text-decoration: none;
-  /* color: #005eae;
+  /* color: #0095FF;
   background-color: #FEF7E6;
   font-size: 2rem;
   margin: 0.25rem;
@@ -54,7 +54,7 @@ a {
   cursor: pointer;
 }
 h1 {
-  color: #009900;
+  color: #6BC88F;
   /* background-color: #FEF7E6; */
   font-family: "Lato", sans-serif;
   font-size: 3rem;
@@ -64,7 +64,7 @@ h1 {
   width: 100%;
 }
 h2 {
-  color: #009900;
+  color: #6BC88F;
   /* background-color: #FEF7E6; */
   font-family: "Lato", sans-serif;
   font-size: 2.5rem;
@@ -74,7 +74,7 @@ h2 {
   width: 100%;
 }
 h3 {
-  color: #009900;
+  color: #6BC88F;
   /* background-color: #FEF7E6; */
   font-family: "Lato", sans-serif;
   font-size: 2.25rem;
@@ -88,8 +88,8 @@ p,
 li,
 label,
 textarea,
-input[type=text],
-input[type=password] {
+input[type="text"],
+input[type="password"] {
   font-family: "Open Sans", sans-serif;
   color: #333;
   border-radius: 1rem;
@@ -101,7 +101,7 @@ input[type=password] {
   list-style-type: none;
   border: 0;
   width: 100%;
-
+  resize: none;
 }
 fieldset {
   border: 0;
@@ -124,3 +124,12 @@ fieldset {
 }
 @media (min-width: 1366px) {
 }
+
+
+/* 
+COLORS
+#6BC88F
+#006400
+#0095FF
+#FD2261 
+*/

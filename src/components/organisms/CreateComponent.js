@@ -123,7 +123,7 @@ export default function CreateComponent() {
     slideImg,
     isImg,
     isQuestionAnswered,
-    isLoading
+    isLoading,
   });
 
   const createHeaderArray = [
@@ -173,6 +173,7 @@ export default function CreateComponent() {
         setSlideIndex={setSlideIndex}
       />
     );
+    console.log(slideText);
   return (
     <div className={ContainersCSS.FlexColStartOnTop66WideContainer}>
       {!isImg ||
@@ -183,6 +184,7 @@ export default function CreateComponent() {
           slideText={slideText}
           addSlide={addSlide}
           setSlideText={setSlideText}
+          slides={slides}
         />
       ) : (
         <CreateImgSlide

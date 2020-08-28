@@ -7,6 +7,7 @@ import firebase from "../../../firebase/clientApp";
 
 //  COMPONENT IMPORTS
 import SpinLoader from "../atoms/SpinLoader";
+import TertiaryButton from "../atoms/TertiaryButton";
 
 // CSS IMPORTS
 import ContainersCSS from "../../../styles/containers.module.css";
@@ -109,6 +110,10 @@ export default function TalkCover({ id, slides, user, NextTalk }) {
     }
   }, [slides]);
 
+  const navToTalk = () => {
+    navigation.navigate("Talk", { talk });
+  };
+
   console.log(state.value);
   console.log(Object.keys(state.value)[0]);
   if (!slides || !id) return <SpinLoader />;
@@ -119,9 +124,7 @@ export default function TalkCover({ id, slides, user, NextTalk }) {
         {/* CHECKING IF WE NEED TO REDENDER THE PAUSE BUTTON */}
         <TalkIconBox id={id} send={send} user={user} />
         {displayingNextBtn ? (
-          <button className={ButtonsCSS.tertiaryButton} onClick={NextTalk}>
-            <p className={ButtonsCSS.tertiaryButtonText}>NEXT</p>
-          </button>
+          <TertiaryButton onClickFunction={NextTalk} buttonText={"NEXT"} />
         ) : (
           <div />
         )}

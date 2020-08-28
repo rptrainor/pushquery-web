@@ -23,7 +23,7 @@ export default function PreviewBox({
       <div
         className={ContainersCSS.FlexColCenteredContainer}
         style={{
-          backgroundColor: "#009900",
+          backgroundColor: "#6BC88F",
           width: "80vw",
           minHeight: "80vh",
           borderRadius: "1rem",
@@ -75,7 +75,7 @@ export default function PreviewBox({
       // className={SlideShowCSS.container}
       className={ContainersCSS.FlexColCenteredContainer}
       style={{
-        backgroundColor: "#009900",
+        backgroundColor: "#6BC88F",
         width: "80vw",
         minHeight: "80vh",
         borderRadius: "1rem",
