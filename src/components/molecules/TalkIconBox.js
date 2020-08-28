@@ -4,6 +4,8 @@ import {
   MessageOutlined,
   FlagOutlined,
   ShareAltOutlined,
+  PauseCircleOutlined,
+  PlayCircleOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
 
@@ -12,7 +14,7 @@ import { useUser } from "../../../context/userContext";
 // STYLE IMPORTS
 import SlideShowCSS from "../../../styles/slideShow.module.css";
 
-export default function TalkIconBox({ id }) {
+export default function TalkIconBox({ id, send, state }) {
   const { loadingUser, user } = useUser();
   const router = useRouter();
 
@@ -50,6 +52,23 @@ export default function TalkIconBox({ id }) {
   console.log(user);
   return (
     <div className={SlideShowCSS.iconBox}>
+      {Object.keys(state.value)[0] == "pause" ? (
+        <PlayCircleOutlined
+          style={{ fontSize: "4rem", color: "#fff" }}
+          onClick={() => send("PLAY")}
+        />
+      ) : (
+        <PauseCircleOutlined
+          style={{ fontSize: "4rem", color: "#fff" }}
+          onClick={() => send("PAUSE")}
+        />
+      )}
+      <FlagOutlined
+        style={{ fontSize: "4rem", color: "#fff" }}
+        onClick={() => {
+          handleReport();
+        }}
+      />
       {user ? (
         <Link href="/talk/[id]" as={`/talk/${id}`}>
           <a>
@@ -61,12 +80,6 @@ export default function TalkIconBox({ id }) {
           <MessageOutlined style={{ fontSize: "4rem", color: "#fff" }} />
         </a>
       )}
-      <FlagOutlined
-        style={{ fontSize: "4rem", color: "#fff" }}
-        onClick={() => {
-          handleReport;
-        }}
-      />
     </div>
   );
 }

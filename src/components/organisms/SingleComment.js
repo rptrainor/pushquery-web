@@ -25,22 +25,21 @@ export default function SingleComment({ user, message }) {
         style={{ width: "auto" }}
       >
         <div className={TalkCSS.commentDetailsBox}>
-          <p className={TalkCSS.displayName}>{message.user.displayName}</p>
-          {/* <p className={TalkCSS.time}>{howLongAgo} ago</p> */}
+          <img
+            src={message.user.photoURL}
+            className={
+              isCurrentUserCommentAuthor
+                ? TalkCSS.avatarRight
+                : TalkCSS.avatarLeft
+            }
+          />
         </div>
         <div className={TalkCSS.commentDetailsBox}>
-          {/* <p className={TalkCSS.displayName}>{message.user.displayName}</p> */}
+          <p className={TalkCSS.displayName}>{message.user.displayName}</p>
           <p className={TalkCSS.time}>{howLongAgo} ago</p>
         </div>
         <p>{message.text}</p>
       </div>
-      <img
-        src={message.user.photoURL}
-        className={TalkCSS.avatar}
-        className={
-          isCurrentUserCommentAuthor ? TalkCSS.avatarRight : TalkCSS.avatarLeft
-        }
-      />
     </div>
   );
 }

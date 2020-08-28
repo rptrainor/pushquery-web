@@ -24,27 +24,27 @@ export const slideMachine = Machine({
       states: {
         0: {
           on: {
-            PAUSE: "#slide.view.1",
+            PLAY: "#slide.view.1",
           },
         },
         1: {
           on: {
-            PAUSE: "#slide.view.2",
+            PLAY: "#slide.view.2",
           },
         },
         2: {
           on: {
-            PAUSE: "#slide.view.3",
+            PLAY: "#slide.view.3",
           },
         },
         3: {
           on: {
-            PAUSE: "#slide.view.4",
+            PLAY: "#slide.view.4",
           },
         },
         4: {
           on: {
-            PAUSE: "#slide.view.0",
+            PLAY: "#slide.view.0",
           },
         },
       },
@@ -100,55 +100,32 @@ export const slideMachine = Machine({
 
 export default function TalkCover({ id, slides, user, NextTalk }) {
   const [state, send] = useMachine(slideMachine);
-  const [displayingNextBtn, setDisplayingNextBtn] = React.useState(false);
-
-  React.useEffect(() => {
-    setTimeout(ShowNextButton, 15000);
-    function ShowNextButton() {
-      setDisplayingNextBtn(true);
-      console.log("DISPLAYED");
-    }
-  }, [slides]);
-
-  const navToTalk = () => {
-    navigation.navigate("Talk", { talk });
-  };
 
   console.log(state.value);
   console.log(Object.keys(state.value)[0]);
   if (!slides || !id) return <SpinLoader />;
   return (
     <div className={ContainersCSS.FlexColStartOnTopContainer}>
-      {/* BELOW IS THE BUTTON WHAT WILL RENDER OVER THE FULL SCREEN WHEN "PAUSE" IS SENT TO THE MACHINE */}
       <div className={SlideShowCSS.container}>
-        {/* CHECKING IF WE NEED TO REDENDER THE PAUSE BUTTON */}
-        <TalkIconBox id={id} send={send} user={user} />
-        {displayingNextBtn ? (
-          <TertiaryButton onClickFunction={NextTalk} buttonText={"NEXT"} />
-        ) : (
-          <div />
-        )}
-        <button className={SlideShowCSS.button} onClick={() => send("PAUSE")}>
-          {Object.keys(state.value)[0] == "pause" ? (
-            <PlayCircleOutlined
-              style={{ fontSize: "10rem", color: "rgba(251, 251, 251, 0.4)" }}
-              className={SlideShowCSS.pauseIcon}
+        <TalkIconBox id={id} send={send} user={user} state={state} />
+        <div
+          style={{
+            height: "100vh",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {slides && slides[state.value.view || state.value.pause].isImg ? (
+            <img
+              src={slides[state.value.view || state.value.pause].slideImg}
+              className={SlideShowCSS.img}
             />
           ) : (
-            <div />
+            <p>{slides[state.value.view || state.value.pause].slideText}</p>
           )}
-          {/* TERNARY STATMENT TO CHECK IF THE SLIDE IS IMG OR TEXT */}
-          <div style={{ height: "100%", width: "100%" }}>
-            {slides && slides[state.value.view || state.value.pause].isImg ? (
-              <img
-                src={slides[state.value.view || state.value.pause].slideImg}
-                className={SlideShowCSS.img}
-              />
-            ) : (
-              <p>{slides[state.value.view || state.value.pause].slideText}</p>
-            )}
-          </div>
-        </button>
+        </div>
       </div>
     </div>
   );

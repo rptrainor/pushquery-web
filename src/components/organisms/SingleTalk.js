@@ -132,11 +132,11 @@ export default function SingleTalk({ id }) {
     );
   console.log(messages);
   return (
-    <div className={ContainersCSS.FlexColStartOnTopContainer}>
-      <TertiaryButton
+    <div className={ContainersCSS.SingleTalkContainer}>
+      {/* <TertiaryButton
         onClickFunction={toggleShowSlideShow}
         buttonText={`SEE ${showSlideShow ? "CONVERSATION" : "SLIDES"}`}
-      />
+      /> */}
       <div className={TalkCSS.msgList}>
         {/* WE NEED TO DO SINGLE COMMENT ONCE WE HAVE USE LOGIN BUILT */}
         {messages ? (
@@ -154,26 +154,24 @@ export default function SingleTalk({ id }) {
           <div />
         )}
       </div>
-      <div>
+      <div className={TalkCSS.msgBox}>
         {!user ? (
           <Link href="login">
             <a>
-              <div className={TalkCSS.msgBox}>
-                <textarea
-                  className={TalkCSS.textInput}
-                  onChange={(event) => setInputText(event.target.value)}
-                  value={inputText}
-                  placeholder="What are you curious about?"
-                />
-                <PrimaryButton
-                  onClickFunction={handleMsgSend}
-                  buttonText={"SEND"}
-                />
-              </div>
+              <textarea
+                className={TalkCSS.textInput}
+                onChange={(event) => setInputText(event.target.value)}
+                value={inputText}
+                placeholder="What are you curious about?"
+              />
+              <PrimaryButton
+                onClickFunction={handleMsgSend}
+                buttonText={"SEND"}
+              />
             </a>
           </Link>
         ) : (
-          <div className={TalkCSS.msgBox}>
+          <>
             <textarea
               className={TalkCSS.textInput}
               onChange={(event) => setInputText(event.target.value)}
@@ -184,7 +182,7 @@ export default function SingleTalk({ id }) {
               onClickFunction={handleMsgSend}
               buttonText={"SEND"}
             />
-          </div>
+          </>
         )}
       </div>
     </div>

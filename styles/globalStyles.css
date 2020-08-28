@@ -6,7 +6,7 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
-  background-color: #FFEFD5;
+  background-color: #ffefd5;
 }
 *,
 *:before,
@@ -18,14 +18,13 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #FFEFD5;
-  max-width: 1000px;
+  background-color: #ffefd5;
   margin: 0 auto;
 }
 header {
   background-color: #fff;
   width: 100vw;
-  border-bottom: 0.1rem solid #C5BFAF;
+  border-bottom: 0.1rem solid #c5bfaf;
 }
 body {
   font-size: 1rem;
@@ -54,7 +53,7 @@ a {
   cursor: pointer;
 }
 h1 {
-  color: #6BC88F;
+  color: #6bc88f;
   /* background-color: #FEF7E6; */
   font-family: "Lato", sans-serif;
   font-size: 3rem;
@@ -64,7 +63,7 @@ h1 {
   width: 100%;
 }
 h2 {
-  color: #6BC88F;
+  color: #6bc88f;
   /* background-color: #FEF7E6; */
   font-family: "Lato", sans-serif;
   font-size: 2.5rem;
@@ -74,7 +73,7 @@ h2 {
   width: 100%;
 }
 h3 {
-  color: #6BC88F;
+  color: #6bc88f;
   /* background-color: #FEF7E6; */
   font-family: "Lato", sans-serif;
   font-size: 2.25rem;
@@ -107,6 +106,9 @@ fieldset {
   border: 0;
   width: 100%;
 }
+button:focus {
+  outline: 0;
+}
 
 @media (min-width: 0px) and (max-width: 567px) {
   html {
@@ -124,7 +126,6 @@ fieldset {
 }
 @media (min-width: 1366px) {
 }
-
 
 /* 
 COLORS

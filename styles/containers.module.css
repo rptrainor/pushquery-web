@@ -5,6 +5,13 @@
   align-items: flex-start;
   width: 100%;
 }
+.SingleTalkContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #6bc88f;
+  justify-content: center;
+  align-items: center;
+}
 .FlexColCenteredContainer {
   display: flex;
   flex-direction: column;
@@ -65,23 +72,18 @@
   .FlexColStartOnTop66WideContainer {
     width: 90%;
   }
-
 }
 
 @media (min-width: 568px) and (max-width: 767px) {
   .FlexColStartOnTop66WideContainer {
     width: 90%;
   }
-
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-
 }
 
 @media (min-width: 1024px) and (max-width: 1365px) {
-
 }
 @media (min-width: 1366px) {
-
 }
