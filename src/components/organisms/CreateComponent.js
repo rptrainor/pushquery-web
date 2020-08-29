@@ -8,11 +8,11 @@ import { useUser } from "../../../context/userContext";
 import PrimaryButton from "../atoms/PrimaryButton";
 import SecondaryButton from "../atoms/SecondaryButton";
 import SpinLoader from "../atoms/SpinLoader";
-import ReviewCompletedSlide from "../molecules/ReviewCompletedSlide";
-import IsImgQuestion from "../molecules/IsImgQuestion";
-import CreateTextSlide from "../molecules/CreateTextSlide";
-import CreateImgSlide from "../molecules/CreateImgSlide";
-import PreviewBox from "../molecules/PreviewBox";
+import ReviewCompletedSlide from "../molecules/reviewCompletedSlide";
+import IsImgQuestion from "../molecules/isImgQuestion";
+import CreateTextSlide from "../molecules/createTextSlide";
+import CreateImgSlide from "../molecules/createImgSlide";
+import PreviewBox from "../molecules/previewBox";
 // CSS IMPORTS
 import ContainersCSS from "../../../styles/containers.module.css";
 
