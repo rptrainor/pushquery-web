@@ -3,7 +3,7 @@ import Link from "next/link";
 import {
   MessageOutlined,
   FlagOutlined,
-  ShareAltOutlined,
+  ForwardOutlined,
   PauseCircleOutlined,
   PlayCircleOutlined,
 } from "@ant-design/icons";
@@ -14,7 +14,7 @@ import { useUser } from "../../../context/userContext";
 // STYLE IMPORTS
 import SlideShowCSS from "../../../styles/slideShow.module.css";
 
-export default function TalkIconBox({ id, send, state }) {
+export default function TalkIconBox({ id, send, state, NextTalk }) {
   const { loadingUser, user } = useUser();
   const router = useRouter();
 
@@ -52,6 +52,10 @@ export default function TalkIconBox({ id, send, state }) {
   console.log(user);
   return (
     <div className={SlideShowCSS.iconBox}>
+      <ForwardOutlined
+        style={{ fontSize: "4rem", color: "#fff" }}
+        onClick={() => NextTalk()}
+      />
       {Object.keys(state.value)[0] == "pause" ? (
         <PlayCircleOutlined
           style={{ fontSize: "4rem", color: "#fff" }}

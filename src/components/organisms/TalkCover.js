@@ -107,7 +107,13 @@ export default function TalkCover({ id, slides, user, NextTalk }) {
   return (
     <div className={ContainersCSS.FlexColStartOnTopContainer}>
       <div className={SlideShowCSS.container}>
-        <TalkIconBox id={id} send={send} user={user} state={state} />
+        <TalkIconBox
+          id={id}
+          send={send}
+          user={user}
+          state={state}
+          NextTalk={NextTalk}
+        />
         <div
           style={{
             height: "100vh",
