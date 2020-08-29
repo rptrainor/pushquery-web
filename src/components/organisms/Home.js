@@ -1,56 +1,102 @@
 import React from "react";
 import firebase from "../../../firebase/clientApp";
 import TalkCover from "./TalkCover";
+import SpinLoader from "../atoms/SpinLoader";
 
 export default function Home() {
   const [talks, setTalks] = React.useState([]);
+  const [lastDoc, setLastDoc] = React.useState({});
   const [loading, setLoading] = React.useState(true);
+  const [isMoreLoading, setIsMoreLoading] = React.useState(false);
+  const [currentTalkIndex, setCurrentTalkIndex] = React.useState(0);
+
+  const talksRef = firebase
+    .firestore()
+    .collection("talks")
+    .where("flag.flagged", "==", false);
 
   // pulling the talks from Firebase
   React.useEffect(() => {
-    const unsubscribe = firebase
-      .firestore()
-      .collection("talks")
-      .where("flag.flagged", "==", false)
-      .orderBy("createdOn", "asc")
-      .onSnapshot((querySnapshot) => {
-        const talks = querySnapshot.docs.map((doc) => {
-          const firebaseData = doc.data();
+    getTalks();
+  }, []);
 
-          const data = {
-            _id: doc.id,
-            title: "",
-            description: "",
-            createdBy: "",
-            createdOn: "",
-            ...firebaseData,
-          };
+  const getTalks = async () => {
+    setLoading(true);
 
-          if (!firebaseData.system) {
-            data.user = {
-              ...firebaseData.user,
-              email: firebaseData.user.email,
-              displayName: firebaseData.user.displayName,
-            };
+    const snapshot = await talksRef.orderBy("id").limit(1).get();
+
+    if (!snapshot.empty) {
+      let newTalks = [];
+
+      setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+
+      for (let i = 0; i < snapshot.docs.length; i++) {
+        newTalks.push(snapshot.docs[i].data());
+      }
+
+      setTalks(newTalks);
+    } else {
+      setLastDoc(null);
+    }
+
+    setLoading(false);
+  };
+
+  const NextTalk = async () => {
+    // if (!talks[currentTalkIndex]) {
+    //   setCurrentTalkIndex(0);
+    //   console.log("RESET INDEX");
+    // }
+    if (lastDoc) {
+      setIsMoreLoading(true);
+
+      setTimeout(async () => {
+        let snapshot = await talksRef
+          .orderBy("id")
+          .startAfter(lastDoc.data().id)
+          .limit(1)
+          .get();
+
+        if (!snapshot.empty) {
+          let newTalks = talks;
+
+          setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+
+          for (let i = 0; i < snapshot.docs.length; i++) {
+            newTalks.push(snapshot.docs[i].data());
           }
 
-          return data;
-        });
-
-        setTalks(talks);
-        console.log(talks);
-
-        if (loading) {
-          setLoading(false);
+          setTalks(newTalks);
+          setCurrentTalkIndex(currentTalkIndex + 1);
+          if (snapshot.docs.length < 1) setLastDoc(null);
+        } else {
+          setCurrentTalkIndex(0);
+          setTalks([]);
+          getTalks();
+          // setLastDoc(null);
         }
-      });
 
-    return () => unsubscribe();
-  }, []);
-  if (loading) return "";
+        setIsMoreLoading(false);
+      }, 1000);
+    }
+  };
+
+  if (loading || isMoreLoading) return <SpinLoader />;
   return (
-    <div>
-      {talks ? talks.map((talk) => <TalkCover talk={talk} key={talk._id} />) : null}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <TalkCover
+        slides={talks[currentTalkIndex].slides}
+        id={talks[currentTalkIndex].id}
+        user={talks[currentTalkIndex].user}
+        NextTalk={NextTalk}
+      />
     </div>
   );
 }

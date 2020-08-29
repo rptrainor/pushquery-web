@@ -16,7 +16,7 @@ export default function Layout({ children }) {
   const { loadingUser, user, isBlocked } = useUser();
   if (loadingUser) return <p></p>;
   return (
-    <div>
+    <div className={LayoutStyles.outerContainer}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <title>Pushquery | Where SciComm Happens</title>
@@ -62,7 +62,7 @@ export default function Layout({ children }) {
               {router.pathname == "/" ? (
                 <div className={LayoutStyles.headerIconBox}>
                   <HomeOutlined
-                    style={{ fontSize: "3rem", color: "#009900" }}
+                    style={{ fontSize: "3rem", color: "#6BC88F" }}
                   />
                   <p>Home</p>
                 </div>
@@ -79,7 +79,7 @@ export default function Layout({ children }) {
               {router.pathname == "/create" ? (
                 <div className={LayoutStyles.headerIconBox}>
                   <PlusCircleOutlined
-                    style={{ fontSize: "3rem", color: "#009900" }}
+                    style={{ fontSize: "3rem", color: "#6BC88F" }}
                   />
                   <p>Create</p>
                 </div>
@@ -98,7 +98,7 @@ export default function Layout({ children }) {
               {router.pathname == "/values" ? (
                 <div className={LayoutStyles.headerIconBox}>
                   <HeartOutlined
-                    style={{ fontSize: "3rem", color: "#009900" }}
+                    style={{ fontSize: "3rem", color: "#6BC88F" }}
                   />
                   <p>Values</p>
                 </div>
@@ -116,7 +116,7 @@ export default function Layout({ children }) {
                 {router.pathname == "/login" || router.pathname == "/signup" ? (
                   <div className={LayoutStyles.headerIconBox}>
                     <UserOutlined
-                      style={{ fontSize: "3rem", color: "#009900" }}
+                      style={{ fontSize: "3rem", color: "#6BC88F" }}
                     />
                     <p>Me</p>
                   </div>
@@ -134,7 +134,7 @@ export default function Layout({ children }) {
                 {router.pathname == "/login" || router.pathname == "/signup" ? (
                   <div className={LayoutStyles.headerIconBox}>
                     <UserOutlined
-                      style={{ fontSize: "3rem", color: "#009900" }}
+                      style={{ fontSize: "3rem", color: "#6BC88F" }}
                     />
                     <p>Me</p>
                   </div>
@@ -150,35 +150,6 @@ export default function Layout({ children }) {
         </div>
       </header>
       <main>{children}</main>
-      {/* <footer className={LayoutStyles.footerContainer}>
-        <div className={LayoutStyles.colItem}>
-          <a href="https://twitter.com/pushquery">
-            <p>Follow Pushquery</p>
-            <img
-              src="/Twitter_Logo_Blue.svg"
-              alt="Twitter logo"
-              className={LayoutStyles.twitterLogo}
-            />
-          </a>
-        </div>
-        <div>
-          <p>Download the mobile App</p>
-          <a href="https://apps.apple.com/us/app/pushquery-app/id1515332528">
-            <img
-              src="/appStoreDL.svg"
-              alt="Download on the Apple App Store"
-              className={LayoutStyles.appStoreDL}
-            />
-          </a>
-          <a href="https://play.google.com/store/apps/details?id=pushquery.app">
-            <img
-              src="/GooglePlayStoreBadge.svg"
-              alt="Get in on the Google Play Store"
-              className={LayoutStyles.appStoreDL}
-            />
-          </a>
-        </div>
-      </footer> */}
     </div>
   );
 }

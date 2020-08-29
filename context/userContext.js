@@ -13,11 +13,24 @@ export default function UserContextComp({ children }) {
     const unsubscriber = firebase.auth().onAuthStateChanged(async (user) => {
       try {
         if (user) {
+          await firebase
+            .firestore()
+            .collection("users")
+            .doc(user.uid)
+            .get()
+            .then((doc) => {
+              setUser({
+                uid: user.uid,
+                displayName: doc.data().displayName,
+                email: user.email,
+                photoURL: doc.data().photoURL,
+              });
+            });
           // User is signed in.
-          const { uid, displayName, email, photoURL } = user;
+          // const { uid, displayName, email, photoURL } = user;
           // You could also look for the user doc in your Firestore (if you have one):
           // const userDoc = await firebase.firestore().doc(`users/${uid}`).get()
-          setUser({ uid, displayName, email, photoURL });
+          // setUser({ uid, displayName, email, photoURL });
           firebase
             .firestore()
             .collection("users")

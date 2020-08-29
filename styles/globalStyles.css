@@ -6,7 +6,7 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
-  background-color: #f2eee4;
+  background-color: #ffefd5;
 }
 *,
 *:before,
@@ -18,35 +18,13 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f2eee4;
-  max-width: 1000px;
+  background-color: #ffefd5;
   margin: 0 auto;
 }
 header {
   background-color: #fff;
   width: 100vw;
-  border-bottom: 0.1rem solid #bab6ad;
-}
-footer {
-  background-color: #fff;
-  width: 100vw;
-  border-top: 0.1rem solid #bab6ad;
-  bottom: 0;
-  position: sticky;
-}
-footer p {
-  font-size: 1.6rem;
-  /* margin: 0.5rem 0 0.5rem 0; */
-  color: #005eae;
-  font-family: "Open Sans", sans-serif;
-}
-footer a {
-  margin: 0;
-  padding: 0;
-  font-size: 2rem;
-  font-family: "Open Sans", sans-serif;
-  cursor: pointer;
-  color: #005eae;
+  border-bottom: 0.1rem solid #c5bfaf;
 }
 body {
   font-size: 1rem;
@@ -65,8 +43,8 @@ img {
 }
 a {
   text-decoration: none;
-  /* color: #005eae;
-  background-color: #f2eee4;
+  /* color: #0095FF;
+  background-color: #FEF7E6;
   font-size: 2rem;
   margin: 0.25rem;
   padding: 0.5rem; */
@@ -74,83 +52,62 @@ a {
   font-family: "Lato", sans-serif;
   cursor: pointer;
 }
-.button_primary {
-  background-color: #009900;
-  border: 0.25rem solid #009900;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 1rem;
-}
-.button_text_primary {
-  color: #ffffff;
-  background-color: #009900;
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0.1rem;
-  padding: 0.1rem;
-  font-family: "Lato", sans-serif;
-  cursor: pointer;
-}
-.button_secondary {
-  background-color: #ffffff;
-  border: 0;
-  margin: 0.5rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  border: 0.25rem solid #009900;
-  border-radius: 1rem;
-}
-.button_text_secondary {
-  color: #009900;
-  background-color: #ffffff;
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0.1rem;
-  padding: 0.1rem;
-  font-family: "Lato", sans-serif;
-  cursor: pointer;
-}
 h1 {
-  color: #009900;
-  background-color: #f2eee4;
+  color: #6bc88f;
+  /* background-color: #FEF7E6; */
   font-family: "Lato", sans-serif;
-  font-size: 2.75rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin: 0.25rem 0.1rem 0 0.1rem;
-  padding: 0.25rem 0.1rem 0 0.1rem;
+  margin: 0.5rem 0.5rem 0 0.5rem;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  width: 100%;
 }
 h2 {
-  color: #009900;
-  background-color: #f2eee4;
-  font-family: "Open Sans", sans-serif;
-  font-size: 2rem;
+  color: #6bc88f;
+  /* background-color: #FEF7E6; */
+  font-family: "Lato", sans-serif;
+  font-size: 2.5rem;
   font-weight: 600;
-  margin: 0.25rem 0.1rem 0 0.1rem;
-  padding: 0.25rem 0.1rem 0 0.1rem;
+  margin: 0.5rem 0.5rem 0 0.5rem;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  width: 100%;
 }
 h3 {
-  color: #009900;
-  background-color: #f2eee4;
-  font-family: "Open Sans", sans-serif;
+  color: #6bc88f;
+  /* background-color: #FEF7E6; */
+  font-family: "Lato", sans-serif;
   font-size: 2.25rem;
   font-weight: 500;
-  margin: 0.25rem 0.1rem 0 0.1rem;
-  padding: 0.25rem 0.1rem 0 0.1rem;
+  margin: 0.5rem 0.5rem 0 0.5rem;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  width: 100%;
 }
 
 p,
 li,
-label {
+label,
+textarea,
+input[type="text"],
+input[type="password"] {
   font-family: "Open Sans", sans-serif;
   color: #333;
-  /* background-color: #f2eee4; */
+  border-radius: 1rem;
   font-weight: 400;
   font-size: 1.8rem;
   line-height: 1.45;
-  margin: 0.25rem 0.1rem 0 0.1rem;
-  padding: 0.25rem 0.1rem 0 0.1rem;
+  margin: 0.5rem 0.5rem 0 0.5rem;
+  padding: 0.5rem 0.5rem 0 0.5rem;
   list-style-type: none;
+  border: 0;
+  width: 100%;
+  resize: none;
+}
+fieldset {
+  border: 0;
+  width: 100%;
+}
+button:focus {
+  outline: 0;
 }
 
 @media (min-width: 0px) and (max-width: 567px) {
@@ -169,3 +126,11 @@ label {
 }
 @media (min-width: 1366px) {
 }
+
+/* 
+COLORS
+#6BC88F
+#006400
+#0095FF
+#FD2261 
+*/

@@ -1,9 +1,16 @@
 import React from "react";
-import ValuesStyles from "../../../styles/valuescomponent.module.css";
+
+// CSS IMPORTS
+import ContainersCSS from "../../../styles/containers.module.css";
+
 export default function ValuesComponent() {
   return (
-    <div className={ValuesStyles.container}>
-      <h1> Our Values</h1>
+    <div
+      className={ContainersCSS.FlexColStartOnTop90WideWhiteBackgroundContainer}
+    >
+      <h1>
+        <center>Our Values</center>
+      </h1>
       <h2>1. Be Kind</h2>
       <p>
         We are a community that leads with love. We live this value by making

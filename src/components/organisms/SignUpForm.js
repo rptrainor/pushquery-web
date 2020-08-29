@@ -1,15 +1,23 @@
 import React from "react";
 import { useRouter } from "next/router";
 import firebase from "../../../firebase/clientApp";
-import LoginStyles from "../../../styles/login.module.css";
+
+//  COMPONENT IMPORTS
+import PrimaryButton from "../atoms/PrimaryButton";
+import SecondaryButton from "../atoms/SecondaryButton";
+import SpinLoader from "../atoms/SpinLoader";
+// CSS IMPORTS
+import ContainersCSS from "../../../styles/containers.module.css";
 
 export default function SignUpForm() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [displayName, setDisplayName] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
   const SignUp = async () => {
+    setIsLoading(true);
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
       await firebase.auth().currentUser.updateProfile({
@@ -34,64 +42,57 @@ export default function SignUpForm() {
       setEmail("");
       setPassword("");
       setDisplayName("");
+      setIsLoading(false);
       router.push("/");
     } catch (error) {
+      setIsLoading(false);
       alert(error);
     }
   };
 
   const NavToLogin = () => {
+    setIsLoading(true);
     try {
       setEmail("");
       setPassword("");
       setDisplayName("");
+      setIsLoading(false);
       router.push("/login");
     } catch (error) {
+      setIsLoading(false);
       alert(error);
     }
   };
-
+  if (isLoading) return <SpinLoader />;
   return (
-    <fieldset className={LoginStyles.fieldset}>
-      <div className={LoginStyles.container}>
-        <h1 className={LoginStyles.header}>Sign Up</h1>
-        <label className={LoginStyles.label} for="displayName">
-          How would you like to be addressed?
-        </label>
-        <input
-          className={LoginStyles.textInput}
-          type="text"
-          name="displayName"
-          value={displayName}
-          onChange={(event) => setDisplayName(event.target.value)}
-        />
-        <label className={LoginStyles.label} for="email">
-          Email
-        </label>
-        <input
-          className={LoginStyles.textInput}
-          type="text"
-          name="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <label className={LoginStyles.label} for="password">
-          Password
-        </label>
-        <input
-          className={LoginStyles.textInput}
-          type="password"
-          name="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <button className={LoginStyles.button} onClick={SignUp}>
-          <p className={LoginStyles.buttonText}>SEND</p>
-        </button>
-        <button className={LoginStyles.buttonSecondary} onClick={NavToLogin}>
-          <p className={LoginStyles.buttonTextSecondary}>LOG IN</p>
-        </button>
-      </div>
+    <fieldset className={ContainersCSS.FlexColStartOnTop66WideContainer}>
+      <h1>Please Sign Up</h1>
+      <label htmlFor="displayName">How would you like to be addressed?</label>
+      <input
+        type="text"
+        name="displayName"
+        id="displayName"
+        value={displayName}
+        onChange={(event) => setDisplayName(event.target.value)}
+      />
+      <label htmlFor="email">Email</label>
+      <input
+        type="text"
+        name="email"
+        id="email"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+      />
+      <PrimaryButton onClickFunction={SignUp} buttonText={"SIGN UP"} />
+      <SecondaryButton onClickFunction={NavToLogin} buttonText={"LOG IN"} />
     </fieldset>
   );
 }
