@@ -5,7 +5,7 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import PrimaryButton from "../atoms/PrimaryButton";
 import SecondaryButton from "../atoms/SecondaryButton";
 import SpinLoader from "../atoms/SpinLoader";
-import ReviewBox from "./reviewBox";
+import ReviewBox from "./ReviewBox";
 // CSS IMPORTS
 import ContainersCSS from "../../../styles/containers.module.css";
 import SlideShowCSS from "../../../styles/slideShow.module.css";
