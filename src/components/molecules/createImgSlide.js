@@ -13,7 +13,6 @@ export default function CreateImgSlide({
   isUploadFileLoading,
 }) {
   return (
-    <>
       <div className={ContainersCSS.FlexColStartOnTop66WideContainer}>
         <h1>{createHeaderArray[slideIndex].createHeader}</h1>
         <label htmlFor="image" className={ButtonsCSS.file}>
@@ -29,6 +28,5 @@ export default function CreateImgSlide({
         </label>
         <PrimaryButton onClickFunction={addSlide} buttonText={"SAVE"} />
       </div>
-    </>
   );
 }

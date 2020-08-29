@@ -4,7 +4,7 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 // COMPONENT IMPORTS
 import TertiaryButton from "../atoms/TertiaryButton";
 import ReviewIconBox from "./ReviewIconBox";
-import ReviewBox from "./ReviewBox";
+import ReviewBox from "./reviewBox";
 // CSS IMPORTS
 import ContainersCSS from "../../../styles/containers.module.css";
 

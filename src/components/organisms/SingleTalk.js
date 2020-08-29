@@ -15,7 +15,7 @@ import ContainersCSS from "../../../styles/containers.module.css";
 import TalkCSS from "../../../styles/talk.module.css";
 import SingleComment from "./SingleComment";
 import PrimaryButton from "../atoms/PrimaryButton";
-import ReviewBox from "../molecules/ReviewBox";
+import ReviewBox from "../molecules/reviewBox";
 import SingleTalkSlideShow from "../molecules/SingleTalkSlideShow";
 
 export default function SingleTalk({ id }) {
