@@ -16,6 +16,7 @@ export default function IsImgQuestion({
   };
 
   return (
+    <>
     <div className={ContainersCSS.FlexColCenteredContainer}>
       <h1>
         <center>Would you like to create a Text or Image slide?</center>
@@ -26,5 +27,6 @@ export default function IsImgQuestion({
         <PrimaryButton onClickFunction={setToImg} buttonText={"IMAGE"} />
       </div>
     </div>
+    </>
   );
 }

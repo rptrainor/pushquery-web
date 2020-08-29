@@ -20,7 +20,7 @@ export default function ReviewCompletedSlide({
   isUploadFileLoading,
   createTalk,
   isLoading,
-  setIsLoading
+  setIsLoading,
 }) {
   const [reviewSlideIndex, setReviewSlideIndex] = React.useState(0);
 
@@ -46,52 +46,57 @@ export default function ReviewCompletedSlide({
 
   if (isUploadFileLoading || isLoading) return <SpinLoader />;
   return (
-    <div
-      className={ContainersCSS.FlexColCenteredContainer}
-      style={{ marginTop: "3rem", marginBottom: "8rem" }}
-    >
+    <>
       <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "nowrap",
-          justifyContent: "space-around",
-          width: "100%",
-        }}
+        className={ContainersCSS.FlexColCenteredContainer}
+        style={{ marginTop: "3rem", marginBottom: "8rem" }}
       >
-        {reviewSlideIndex !== 0 ? (
-          <button
-            onClick={backOneSlide}
-            style={{ backgroundColor: "transparent", border: 0 }}
-          >
-            <LeftOutlined style={{ fontSize: "3rem", color: "#333" }} />
-          </button>
-        ) : (
-          <div />
-        )}
-        {reviewSlideIndex !== 4 ? (
-          <button
-            onClick={forwardOneSlide}
-            style={{ backgroundColor: "transparent", border: 0 }}
-          >
-            <RightOutlined style={{ fontSize: "3rem", color: "#333" }} />
-          </button>
-        ) : (
-          <div />
-        )}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: "space-around",
+            width: "100%",
+          }}
+        >
+          {reviewSlideIndex !== 0 ? (
+            <button
+              onClick={backOneSlide}
+              style={{ backgroundColor: "transparent", border: 0 }}
+            >
+              <LeftOutlined style={{ fontSize: "3rem", color: "#333" }} />
+            </button>
+          ) : (
+            <div />
+          )}
+          {reviewSlideIndex !== 4 ? (
+            <button
+              onClick={forwardOneSlide}
+              style={{ backgroundColor: "transparent", border: 0 }}
+            >
+              <RightOutlined style={{ fontSize: "3rem", color: "#333" }} />
+            </button>
+          ) : (
+            <div />
+          )}
+        </div>
+        <ReviewBox
+          slides={slides}
+          reviewSlideIndex={reviewSlideIndex}
+          // slideText={slideText}
+          // slideIndex={reviewSlideIndex}
+          // slideImg={slideImg}
+        />
+        <SecondaryButton
+          onClickFunction={editSlide}
+          buttonText={"EDIT THIS SLIDE"}
+        />
+        <PrimaryButton
+          onClickFunction={createTalk}
+          buttonText={"PUBLISH TALK"}
+        />
       </div>
-      <ReviewBox
-        slides={slides}
-        reviewSlideIndex={reviewSlideIndex}
-        // slideText={slideText}
-        // slideIndex={reviewSlideIndex}
-        // slideImg={slideImg}
-      />
-      <SecondaryButton
-        onClickFunction={editSlide}
-        buttonText={"EDIT THIS SLIDE"}
-      />
-      <PrimaryButton onClickFunction={createTalk} buttonText={"PUBLISH TALK"} />
-    </div>
+    </>
   );
 }

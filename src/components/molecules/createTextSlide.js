@@ -23,6 +23,7 @@ export default function CreateTextSlide({
   console.log(slides);
   console.log(slideIndex);
   return (
+    <>
     <div className={ContainersCSS.FlexColStartOnTop66WideContainer}>
       <h1>{createHeaderArray[slideIndex].createHeader}</h1>
       <label>280 character limit</label>
@@ -35,5 +36,6 @@ export default function CreateTextSlide({
       />
       <PrimaryButton onClickFunction={addSlide} buttonText={"SAVE"} />
     </div>
+    </>
   );
 }

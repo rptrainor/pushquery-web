@@ -20,54 +20,56 @@ export default function PreviewBox({
 
   if (slides[slideIndex].slideText || slides[slideIndex].slideImg)
     return (
-      <div
-        className={ContainersCSS.FlexColCenteredContainer}
-        style={{
-          backgroundColor: "#6BC88F",
-          width: "80vw",
-          minHeight: "80vh",
-          borderRadius: "1rem",
-          margin: "3rem",
-          padding: "1rem",
-          color: "#fff",
-          maxWidth: "100rem",
-        }}
-      >
-        {!slides[slideIndex].isImg && !slides[slideIndex].slideImg ? (
-          <p
-            style={{
-              color: "#fff",
-              padding: "1rem",
-              fontSize: "3rem",
-              lineHeight: "1.5",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            {slides[slideIndex] &&
-            slides[slideIndex].slideText &&
-            slideText === ""
-              ? slides[slideIndex].slideText
-              : slideText}
-          </p>
-        ) : (
-          <img
-            style={{
-              width: "80vw",
-              padding: "1rem",
-            }}
-            src={
-              slides[slideIndex] &&
-              slides[slideIndex].slideImg &&
-              slideImg === ""
-                ? slides[slideIndex].slideImg
-                : slideImg
-            }
-          />
-        )}
-      </div>
+      <>
+        <div
+          className={ContainersCSS.FlexColCenteredContainer}
+          style={{
+            backgroundColor: "#6BC88F",
+            width: "80vw",
+            minHeight: "80vh",
+            borderRadius: "1rem",
+            margin: "3rem",
+            padding: "1rem",
+            color: "#fff",
+            maxWidth: "100rem",
+          }}
+        >
+          {!slides[slideIndex].isImg && !slides[slideIndex].slideImg ? (
+            <p
+              style={{
+                color: "#fff",
+                padding: "1rem",
+                fontSize: "3rem",
+                lineHeight: "1.5",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              {slides[slideIndex] &&
+              slides[slideIndex].slideText &&
+              slideText === ""
+                ? slides[slideIndex].slideText
+                : slideText}
+            </p>
+          ) : (
+            <img
+              style={{
+                width: "80vw",
+                padding: "1rem",
+              }}
+              src={
+                slides[slideIndex] &&
+                slides[slideIndex].slideImg &&
+                slideImg === ""
+                  ? slides[slideIndex].slideImg
+                  : slideImg
+              }
+            />
+          )}
+        </div>
+      </>
     );
   if (isLoading || isUploadFileLoading) return <SpinLoader />;
   return (
